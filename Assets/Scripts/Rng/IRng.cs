@@ -5,7 +5,7 @@
 /// </remarks>
 public interface IRng
 {
-    void setSeed(int seedValue);
+    void setSeed(int? seedValue);
     int randomIntRange(int min, int max);
     double randomDouble();
 }

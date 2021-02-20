@@ -29,7 +29,14 @@ public class MockRng : IRng
 
     public void setSeed(int? seedValue)
     {
-        _random = new Random(seedValue);
+        if (seedValue.HasValue)
+        {
+            _random = new Random(seedValue.Value);
+        }
+        else
+        {
+            _random = new Random();
+        }
     }
 
     public int randomIntRange(int min, int max)
@@ -89,7 +96,7 @@ public class MockRng : IRng
 
     public void clearMockInts()
     {
-        _nextint = null;
+        _nextInt = null;
         _intSequence = null;
     }
 

@@ -6,12 +6,25 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayingCardDeck : ICardDeck<PlayingCard>
 {
+    // This is lazy-instantiated as some deck instances may be purely reference prototypes
     private IReadOnlyList<PlayingCard> _cards;
 
     public PlayingCardDeck()
     {
-        // Cache the collection as readonly
-        _cards = buildDeck().AsReadOnly();
+        // Intentionally blank
+    }
+
+    public IReadOnlyList<PlayingCard> cards
+    {
+        get
+        {
+            if (_cards == null)
+            {
+                // Cache the collection as readonly
+                _cards = buildDeck().AsReadOnly();
+            }
+            return _cards;
+        }
     }
 
     /// <remarks>
@@ -50,8 +63,6 @@ public class PlayingCardDeck : ICardDeck<PlayingCard>
     {
         return new PlayingCard(rank, suit);
     }
-
-    public IReadOnlyList<PlayingCard> cards => _cards;
 
     /// <remarks>
     /// The purpose of clone is we want completely separate card instances.

@@ -1569,7 +1569,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -784,
+											"left": -728,
 											"top": 22,
 											"height": 13
 										},
@@ -1580,11 +1580,11 @@
 												"$ref": "AAAAAAF3uLonLeOeaJ0="
 											},
 											"font": "Arial;13;1",
-											"left": 417,
+											"left": 445,
 											"top": 675,
-											"width": 163.2744140625,
+											"width": 106.9326171875,
 											"height": 13,
-											"text": "StandardPlayingCardDeck"
+											"text": "PlayingCardDeck"
 										},
 										{
 											"_type": "LabelView",
@@ -1594,7 +1594,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -784,
+											"left": -728,
 											"top": 22,
 											"width": 73.67724609375,
 											"height": 13,
@@ -1608,16 +1608,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -784,
+											"left": -728,
 											"top": 22,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 412,
+									"left": 440,
 									"top": 668,
-									"width": 173.2744140625,
+									"width": 116.9326171875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3uLonLeOfzmc="
@@ -1642,9 +1642,9 @@
 										"$ref": "AAAAAAF3uLonLOOb6Q8="
 									},
 									"font": "Arial;13;0",
-									"left": 412,
+									"left": 440,
 									"top": 693,
-									"width": 173.2744140625,
+									"width": 116.9326171875,
 									"height": 10
 								},
 								{
@@ -1667,9 +1667,9 @@
 												"$ref": "AAAAAAF3uMRdUeQSPGc="
 											},
 											"font": "Arial;13;0",
-											"left": 417,
+											"left": 445,
 											"top": 708,
-											"width": 163.2744140625,
+											"width": 106.9326171875,
 											"height": 13,
 											"text": "+ctor()",
 											"horizontalAlignment": 0
@@ -1684,18 +1684,18 @@
 												"$ref": "AAAAAAF3uMSLE+QZViU="
 											},
 											"font": "Arial;13;0",
-											"left": 417,
+											"left": 445,
 											"top": 723,
-											"width": 163.2744140625,
+											"width": 106.9326171875,
 											"height": 13,
 											"text": "-buildDeck(): void",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 412,
+									"left": 440,
 									"top": 703,
-									"width": 173.2744140625,
+									"width": 116.9326171875,
 									"height": 38
 								},
 								{
@@ -1709,7 +1709,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -392,
+									"left": -364,
 									"top": 11,
 									"width": 10,
 									"height": 10
@@ -1725,7 +1725,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -392,
+									"left": -364,
 									"top": 11,
 									"width": 10,
 									"height": 10
@@ -1733,9 +1733,9 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 412,
+							"left": 440,
 							"top": 668,
-							"width": 173.2744140625,
+							"width": 116.9326171875,
 							"height": 73,
 							"autoResize": true,
 							"nameCompartment": {
@@ -1775,7 +1775,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 428,
+									"left": 427,
 									"top": 621,
 									"width": 111.39501953125,
 									"height": 13,
@@ -1797,9 +1797,9 @@
 										"$ref": "AAAAAAF3uL/pV+PsRx0="
 									},
 									"font": "Arial;13;0",
-									"left": 511,
-									"top": 633,
-									"width": 74.92138671875,
+									"left": 504,
+									"top": 635,
+									"width": 85.2744140625,
 									"height": 13,
 									"autoResize": true,
 									"alpha": -1.8063409049871324,
@@ -1808,7 +1808,7 @@
 										"$ref": "AAAAAAF3uL/pV+Ptq7g="
 									},
 									"edgePosition": 1,
-									"text": "«CardValue»"
+									"text": "«PlayingCard»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1821,7 +1821,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 512,
+									"left": 511,
 									"top": 622,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1840,7 +1840,7 @@
 								"$ref": "AAAAAAF3uLonLeOdrpo="
 							},
 							"lineStyle": 1,
-							"points": "498:667;498:590",
+							"points": "497:667;498:590",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3uL/pWOPu3mg="
@@ -1895,7 +1895,7 @@
 											"top": 646,
 											"width": 214.21435546875,
 											"height": 13,
-											"text": "CardValue"
+											"text": "PlayingCard"
 										},
 										{
 											"_type": "LabelView",
@@ -2069,7 +2069,7 @@
 											"top": 752,
 											"width": 214.21435546875,
 											"height": 13,
-											"text": "+clone(): CardValue",
+											"text": "+clone(): PlayingCard",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3338,7 +3338,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 615,
+									"left": 601,
 									"top": 713,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -3359,7 +3359,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 615,
+									"left": 601,
 									"top": 728,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -3380,7 +3380,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 616,
+									"left": 602,
 									"top": 683,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -3464,7 +3464,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 610,
+									"left": 582,
 									"top": 712,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -3484,7 +3484,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 613,
+									"left": 585,
 									"top": 726,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -3504,7 +3504,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 606,
+									"left": 578,
 									"top": 685,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -3554,7 +3554,7 @@
 								"$ref": "AAAAAAF3uMZiCeQkr5E="
 							},
 							"lineStyle": 1,
-							"points": "647:704;585:704",
+							"points": "647:704;557:704",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3uM1aM+b8jpM="
@@ -4135,9 +4135,9 @@
 										"$ref": "AAAAAAF3uNsRovAOLnM="
 									},
 									"font": "Arial;13;0",
-									"left": 807,
+									"left": 802,
 									"top": 360,
-									"width": 74.92138671875,
+									"width": 85.2744140625,
 									"height": 13,
 									"autoResize": true,
 									"alpha": 2.059056983222675,
@@ -4146,7 +4146,7 @@
 										"$ref": "AAAAAAF3uNsRovAPEeI="
 									},
 									"edgePosition": 1,
-									"text": "«CardValue»"
+									"text": "«PlayingCard»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -6164,7 +6164,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "StandardPlayingCardDeck",
+					"name": "PlayingCardDeck",
 					"ownedElements": [
 						{
 							"_type": "UMLInterfaceRealization",
@@ -6220,7 +6220,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CardValue",
+					"name": "PlayingCard",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

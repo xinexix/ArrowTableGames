@@ -1,22 +1,22 @@
 using System;
 using System.Collections.Generic;
 
-public class StandardPlayingCardDeck : ICardDeck<CardValue>
+public class PlayingCardDeck : ICardDeck<PlayingCard>
 {
-    private IReadOnlyList<CardValue> _cards;
+    private IReadOnlyList<PlayingCard> _cards;
 
-    public StandardPlayingCardDeck()
+    public PlayingCardDeck()
     {
         // Cache the collection as readonly
         _cards = buildDeck().AsReadOnly();
     }
 
-    protected virtual List<CardValue> buildDeck()
+    protected virtual List<PlayingCard> buildDeck()
     {
         var rankList = (CardRank[])Enum.GetValues(typeof(CardRank));
         var suitList = (CardSuit[])Enum.GetValues(typeof(CardSuit));
         var numCards = rankList.Length * suitList.Length;
-        var temp = new List<CardValue>(numCards);
+        var temp = new List<PlayingCard>(numCards);
 
         // Iterate each suit; order doesn't matter
         foreach (var suit in suitList)
@@ -34,15 +34,15 @@ public class StandardPlayingCardDeck : ICardDeck<CardValue>
     }
 
     /// <remarks>
-    /// Factory method to support extending CardValue.  Seems unlikely, and I debated if it was
+    /// Factory method to support extending PlayingCard.  Seems unlikely, and I debated if it was
     /// worth the virtual method overhead, but I tend to wrap direct constructions like this.
     /// </remarks>
-    protected virtual CardValue createCard(CardRank rank, CardSuit suit)
+    protected virtual PlayingCard createCard(CardRank rank, CardSuit suit)
     {
-        return new CardValue(rank, suit);
+        return new PlayingCard(rank, suit);
     }
 
-    public IReadOnlyList<CardValue> cards => _cards;
+    public IReadOnlyList<PlayingCard> cards => _cards;
 
     /// <remarks>
     /// The purpose of clone is we want completely separate card instances.
@@ -52,8 +52,8 @@ public class StandardPlayingCardDeck : ICardDeck<CardValue>
     /// It's occurred to me maybe this could be a static method, but I'd have to spend time
     /// researching the right way to hook that up.  Not worth it right now.
     /// </remarks>
-    public virtual ICardDeck<CardValue> clone()
+    public virtual ICardDeck<PlayingCard> clone()
     {
-        return new StandardPlayingCardDeck();
+        return new PlayingCardDeck();
     }
 }

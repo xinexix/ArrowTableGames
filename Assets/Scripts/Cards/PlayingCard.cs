@@ -1,10 +1,10 @@
-public class CardValue
+public class PlayingCard
 {
     private CardRank _rank;
     private CardSuit _suit;
     private string _cachedName;
 
-    public CardValue(CardRank rank, CardSuit suit)
+    public PlayingCard(CardRank rank, CardSuit suit)
     {
         _rank = rank;
         _suit = suit;
@@ -42,8 +42,8 @@ public class CardValue
 
     public string name => _cachedName;
 
-    public CardValue clone()
+    public PlayingCard clone()
     {
-        return new CardValue(_rank, _suit);
+        return new PlayingCard(_rank, _suit);
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a single deck of traditional playing cards: 4 suits, 13 ranks each, 52 total cards.
+/// </summary>
 public class PlayingCardDeck : ICardDeck<PlayingCard>
 {
     private IReadOnlyList<PlayingCard> _cards;

@@ -1,3 +1,7 @@
+/// <summary>
+/// Represents an individual traditional playing card, which has 1 of 4 possible suits and
+/// 1 of 13 possible ranks.
+/// </summary>
 public class PlayingCard
 {
     private CardRank _rank;

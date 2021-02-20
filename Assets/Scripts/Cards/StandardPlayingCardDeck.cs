@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class StandardPlayingCardDeck : ICardDeck<CardValue>
 {
-    private const int NUM_RANKS_PER_SUIT = 13;
-
     private IReadOnlyList<CardValue> _cards;
 
     public StandardPlayingCardDeck()
@@ -15,17 +13,18 @@ public class StandardPlayingCardDeck : ICardDeck<CardValue>
 
     protected virtual List<CardValue> buildDeck()
     {
+        var rankList = (CardRank[])Enum.GetValues(typeof(CardRank));
         var suitList = (CardSuit[])Enum.GetValues(typeof(CardSuit));
-        var numCards = suitList.Length * NUM_RANKS_PER_SUIT;
+        var numCards = rankList.Length * suitList.Length;
         var temp = new List<CardValue>(numCards);
 
         // Iterate each suit; order doesn't matter
         foreach (var suit in suitList)
         {
-            for (var i = 0; i < NUM_RANKS_PER_SUIT; i++)
+            foreach (var rank in rankList)
             {
                 // Create a card for each rank in each suit
-                var card = createCard(i + 1, suit);
+                var card = createCard(rank, suit);
 
                 temp.Add(card);
             }
@@ -38,7 +37,7 @@ public class StandardPlayingCardDeck : ICardDeck<CardValue>
     /// Factory method to support extending CardValue.  Seems unlikely, and I debated if it was
     /// worth the virtual method overhead, but I tend to wrap direct constructions like this.
     /// </remarks>
-    protected virtual CardValue createCard(int rank, CardSuit suit)
+    protected virtual CardValue createCard(CardRank rank, CardSuit suit)
     {
         return new CardValue(rank, suit);
     }

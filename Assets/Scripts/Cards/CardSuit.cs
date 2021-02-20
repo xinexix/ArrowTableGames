@@ -1,4 +1,4 @@
-﻿enum CardSuit
+﻿public enum CardSuit
 {
     Heart,
     Diamond,

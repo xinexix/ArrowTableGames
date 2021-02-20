@@ -5,9 +5,9 @@ public class CardValue
     private CardSuit _suit;
     private string _cachedName;
 
-    public constructor(int rank, CardSuit suit)
+    public CardValue(int rank, CardSuit suit)
     {
-        this.rank = rank;
+        _rank = rank;
         _suit = suit;
         _cachedName = generateName();
     }

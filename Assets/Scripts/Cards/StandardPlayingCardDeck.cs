@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+
 public class StandardPlayingCardDeck : ICardDeck<CardValue>
 {
     private const int NUM_RANKS_PER_SUIT = 13;
 
     private IReadOnlyList<CardValue> _cards;
 
-    public constructor()
+    public StandardPlayingCardDeck()
     {
         // Cache the collection as readonly
         _cards = buildDeck().AsReadOnly();
@@ -48,7 +51,7 @@ public class StandardPlayingCardDeck : ICardDeck<CardValue>
     /// (to be effective it has to be overridable anyway).
     ///
     /// It's occurred to me maybe this could be a static method, but I'd have to spend time
-    /// researching how to accomplish that.  Not worth it right now.
+    /// researching the right way to hook that up.  Not worth it right now.
     /// </remarks>
     public virtual ICardDeck<CardValue> clone()
     {

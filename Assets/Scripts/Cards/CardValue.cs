@@ -1,18 +1,26 @@
 public class CardValue
 {
-
-    private int _rank;
+    private CardRank _rank;
     private CardSuit _suit;
     private string _cachedName;
 
-    public CardValue(int rank, CardSuit suit)
+    public CardValue(CardRank rank, CardSuit suit)
     {
         _rank = rank;
         _suit = suit;
         _cachedName = generateName();
     }
 
-    public int rank => _rank;
+    private string generateName()
+    {
+        string prefix = nameof(_rank);
+
+        string suffix = nameof(_suit);
+
+        return $"{prefix} of {suffix}s";
+    }
+
+    public CardRank rank => _rank;
 
     public CardSuit suit => _suit;
 
@@ -34,41 +42,8 @@ public class CardValue
 
     public string name => _cachedName;
 
-    private string generateName()
+    public CardValue clone()
     {
-        if (_rank < 1 || rank > 13)
-        {
-            return "Cthulhu of Lovecraft";
-        }
-
-        string prefix;
-
-        if (_rank >= 2 && _rank <= 10)
-        {
-            prefix = _rank.ToString();
-        }
-        else
-        {
-            switch (_rank)
-            {
-                case 11:
-                    prefix = "J";
-                    break;
-                case 12:
-                    prefix = "Q";
-                    break;
-                case 13:
-                    prefix = "K";
-                    break;
-                case 1:
-                default:
-                    prefix = "A";
-                    break;
-            }
-        }
-
-        string suffix = nameof(_suit);
-
-        return $"{prefix} of {suffix}s";
+        return new CardValue(_rank, _suit);
     }
 }

@@ -21,7 +21,7 @@ public class PlayingCard
 
         string suffix = nameof(_suit);
 
-        return $"{prefix} of {suffix}s";
+        return $"{prefix}_of_{suffix}s";
     }
 
     public CardRank rank => _rank;

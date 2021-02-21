@@ -44,6 +44,26 @@ public class PlayingCard
         }
     }
 
+    public CardType type
+    {
+        get
+        {
+            switch (_rank)
+            {
+                case CardRank.Ace:
+                    return CardType.Ace;
+
+                case CardRank.Jack:
+                case CardRank.Queen:
+                case CardRank.King:
+                    return CardType.Face;
+
+                default:
+                    return CardType.Number;
+            }
+        }
+    }
+
     public string name => _cachedName;
 
     public PlayingCard clone()

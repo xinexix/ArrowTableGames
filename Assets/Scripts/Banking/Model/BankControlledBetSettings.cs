@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class BankControlledBetSettings
+public class BankControlledBetSettings : IBetSettings
 {
     private IReadOnlyList<int> _betSteps = new List<int>();
     private int _betIndex = 0;

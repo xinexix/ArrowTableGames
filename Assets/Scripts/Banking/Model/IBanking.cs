@@ -7,7 +7,7 @@ public interface IBanking
     ITransactionHistory ledger { get; }
     IBetSettings betSettings { get; }
 
-    void setBetSteps(IReadOnlyList<int> steps);
+    void setBetSteps(List<int> steps);
     void depositFunds(float amount);
     float cashOut();
     void increaseBet();

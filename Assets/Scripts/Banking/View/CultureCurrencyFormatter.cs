@@ -1,14 +1,14 @@
 using System.Globalization;
 
-public class UsdCurrencyFormatter
+public class CultureCurrencyFormatter : ICurrencyFormatter
 {
     private float _denomination;
     private CultureInfo _culture;
 
-    public UsdCurrencyFormatter(float denomination)
+    public CultureCurrencyFormatter(float denomination, string cultureName)
     {
         _denomination = denomination;
-        _culture = CultureInfo.CreateSpecificCulture("en-US");
+        _culture = CultureInfo.CreateSpecificCulture(cultureName);
     }
 
     public string format(int value)

@@ -17,6 +17,10 @@ public class BankControlledLedger : ITransactionHistory
 
     public IReadOnlyList<ITransactionRecord> history => _history.AsReadOnly();
 
+    public ITransactionRecord lastCommittedTransaction => _history.Count > 0 ? _history[_history.Count - 1] : null;
+
+    public ITransactionRecord inProgressTransaction => _activeRecord;
+
     public event EventHandler onTransactionCommitted;
 
     public void startTransaction(string gameId)
@@ -24,14 +28,14 @@ public class BankControlledLedger : ITransactionHistory
         finalizeTransaction();
 
         _activeRecord = createRecord(gameId, _instanceCount++);
-
-        _history.Add(_activeRecord);
     }
 
     public void finalizeTransaction()
     {
         if (_activeRecord != null)
         {
+            _history.Add(_activeRecord);
+
             _activeRecord = null;
 
             onTransactionCommitted?.Invoke(this, EventArgs.Empty);

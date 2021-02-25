@@ -6,6 +6,7 @@
 public interface IRng
 {
     void setSeed(int? seedValue);
-    int randomIntRange(int min, int max);
+    int randomInRange(int min, int max);
+    int randomInt();
     double randomDouble();
 }

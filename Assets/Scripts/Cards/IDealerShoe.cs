@@ -8,8 +8,9 @@ using System;
 /// <typeparam name="TCard">The type of cards which are dealt from this shoe.</typeparam>
 public interface IDealerShoe<TCard>
 {
-    void populate(int numDecks);
-    void resetAllDealt();
+    void clearShoe();
+    void addDeck(ICardDeck<TCard> referenceDeck);
+    void returnAllDealt();
     void returnCards(TCard[] cards);
     void shuffleRemaining(int? seed);
     void sortRemaining(Comparison<TCard> comparison);

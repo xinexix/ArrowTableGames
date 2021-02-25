@@ -39,7 +39,17 @@ public class MockRng : IRng
         }
     }
 
-    public int randomIntRange(int min, int max)
+    public int randomInRange(int min, int max)
+    {
+        if (_nextInt.HasValue || _intSequence != null)
+        {
+            return randomInt();
+        }
+
+        return _random.Next(min, max + 1);
+    }
+
+    public int randomInt()
     {
         if (_nextInt.HasValue)
         {
@@ -55,7 +65,7 @@ public class MockRng : IRng
             return _intSequence[_intSequenceIndex++];
         }
 
-        return _random.Next(min, max + 1);
+        return _random.Next();
     }
 
     public double randomDouble()

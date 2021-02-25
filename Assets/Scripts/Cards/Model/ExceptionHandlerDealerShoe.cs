@@ -2,57 +2,60 @@ using System;
 using System.Runtime.CompilerServices;
 
 /// <remarks>
-/// It'd be more appropriate to name this ExceptionHandlerDealerShoe, but my UML is getting a bit
-/// wide...
-///
 /// This is the decorator pattern.  This a) separates the concerns of error handling from the
-/// actual work, and b) allows for different error handling (such as events that'd trigger a
-/// popup instead of throwing an exception).
+/// desired functionality, and b) allows for different error handling (such as events that'd
+/// trigger a popup instead of throwing an exception).
 /// </remarks>
-public class ErrorHandlerDealerShoe<TCard> : IDealerShoe<TCard>
+public class ExceptionHandlerDealerShoe<TCard> : IDealerShoe<TCard>
 {
     private IDealerShoe<TCard> _subComponent;
-    private bool _isInitialized = false;
+    private bool _hasCards = false;
 
-    public ErrorHandlerDealerShoe(IDealerShoe<TCard> subComponent)
+    public ExceptionHandlerDealerShoe(IDealerShoe<TCard> subComponent)
     {
         _subComponent = subComponent;
     }
 
     public int numCardsRemaining => _subComponent.numCardsRemaining;
 
-    public void populate(int numDecks)
+    public void clearShoe()
     {
-        _isInitialized = true;
-        _subComponent.populate(numDecks);
+        _subComponent.clearShoe();
+        _hasCards = false;
     }
 
-    public void resetAllDealt()
+    public void addDeck(ICardDeck<TCard> referenceDeck)
     {
-        validateInit();
+        _subComponent.addDeck(referenceDeck);
+        _hasCards = _subComponent.numCardsRemaining > 0;
+    }
 
-        _subComponent.resetAllDealt();
+    public void returnAllDealt()
+    {
+        validateHasCards();
+
+        _subComponent.returnAllDealt();
     }
 
     /// <remarks>
     /// According to StackOverflow, using this parameter attribute has very little overhead.
     /// </remarks>
-    private void validateInit([CallerMemberName] string method = "?")
+    private void validateHasCards([CallerMemberName] string method = "?")
     {
-        if (!_isInitialized)
+        if (!_hasCards)
         {
             throw new InvalidOperationException(
-                $"IDealerShoe.{method} called before being populated");
+                $"IDealerShoe.{method} called while the shoe is empty");
         }
     }
 
     public void returnCards(TCard[] cards)
     {
-        validateInit();
+        validateHasCards();
 
         if (cards == null || cards.Length == 0)
         {
-            throw new ArgumentException("IDealerShoe.returnCards called with no cards");
+            throw new ArgumentException("IDealerShoe.returnCards called with no cards to return");
         }
 
         _subComponent.returnCards(cards);
@@ -60,26 +63,26 @@ public class ErrorHandlerDealerShoe<TCard> : IDealerShoe<TCard>
 
     public void shuffleRemaining(int? seed)
     {
-        validateInit();
+        validateHasCards();
 
         _subComponent.shuffleRemaining(seed);
     }
 
     public void sortRemaining(Comparison<TCard> comparison)
     {
-        validateInit();
+        validateHasCards();
 
         _subComponent.sortRemaining(comparison);
     }
 
     public TCard drawNextCard()
     {
-        validateInit();
+        validateHasCards();
 
         if (_subComponent.numCardsRemaining == 0)
         {
             throw new InvalidOperationException(
-                "IDealerShoe.drawNextCard called when no cards are remaining");
+                "IDealerShoe.drawNextCard called with no cards remaining to deal");
         }
 
         return _subComponent.drawNextCard();

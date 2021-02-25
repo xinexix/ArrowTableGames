@@ -4,61 +4,45 @@ using System.Collections.Generic;
 public class DealerShoe<TCard> : IDealerShoe<TCard>
 {
     private IRng _rng;
-    private ICardDeck<TCard> _referenceDeck;
     private List<TCard> _availableCards = new List<TCard>();
     private List<TCard> _dealtCards = new List<TCard>();
 
-    public DealerShoe(IRng rng, ICardDeck<TCard> referenceDeck)
+    public DealerShoe(IRng rng)
     {
         _rng = rng;
-        _referenceDeck = referenceDeck;
     }
 
     public int numCardsRemaining => _availableCards.Count;
 
-    public void populate(int numDecks)
-    {
-        // Release any previous instances
-        /// <remarks>
-        /// Given C#s generational garbage collection, I expect this would be a bad implementation
-        /// for performance on a long-running machine, but I didn't want to manage a count of each
-        /// specific card so this implementation felt reasonable here
-        /// </remarks>
-        releaseCards();
-
-        // We obtain separate deck instances to have separate card instances
-        for (var i = 0; i < numDecks; i++)
-        {
-            var tempDeck = _referenceDeck.clone();
-
-            _availableCards.AddRange(tempDeck.cards);
-        }
-
-        trimCards();
-    }
-
-    private void releaseCards()
+    /// <remarks>
+    /// Because of the use of TimeExcess, this approach might be problematic for a  long-running
+    /// instance such as a bar machine.  However in this project I don't expect this method to
+    /// be utilized much and so don't expect significant performance concerns.
+    /// </remarks>
+    public void clearShoe()
     {
         _availableCards.Clear();
         _dealtCards.Clear();
-    }
 
-    private void trimCards()
-    {
-        // Reduce the capacity to just what is needed
+        // Reset capacities to the default
         _availableCards.TrimExcess();
-
-        // Reset the capacity to the default and allow it to grow as necessary
-        /// <remarks>
-        /// Again, this might be unwise for a long-running game; possible memory fragmentation?
-        /// </remarks>
         _dealtCards.TrimExcess();
     }
 
-    public void resetAllDealt()
+    public void addDeck(ICardDeck<TCard> referenceDeck)
+    {
+        var uniqueDeck = referenceDeck.clone();
+
+        _availableCards.AddRange(uniqueDeck.cards);
+    }
+
+    public void returnAllDealt()
     {
         _availableCards.AddRange(_dealtCards);
         _dealtCards.Clear();
+
+        // Reset the capacity to the default and allow it to grow as necessary
+        _dealtCards.TrimExcess();
     }
 
     public void returnCards(TCard[] cards)
@@ -94,7 +78,7 @@ public class DealerShoe<TCard> : IDealerShoe<TCard>
         {
             walkIndex--;
 
-            var swapIndex = rng.randomIntRange(0, walkIndex);
+            var swapIndex = rng.randomInRange(0, walkIndex);
 
             /// <remarks>
             /// C# 7 tuple trick to swap without an explicit temp...kinda ugly

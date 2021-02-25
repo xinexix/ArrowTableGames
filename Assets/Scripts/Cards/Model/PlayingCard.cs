@@ -6,22 +6,24 @@ public class PlayingCard
 {
     private CardRank _rank;
     private CardSuit _suit;
-    private string _cachedName;
+    private string _cachedId;
 
     public PlayingCard(CardRank rank, CardSuit suit)
     {
         _rank = rank;
         _suit = suit;
-        _cachedName = generateName();
+        _cachedId = generateId();
     }
 
-    private string generateName()
+    public string id => _cachedId;
+
+    private string generateId()
     {
         string prefix = nameof(_rank);
 
         string suffix = nameof(_suit);
 
-        return $"{prefix} of {suffix}s";
+        return $"{prefix}_of_{suffix}s";
     }
 
     public CardRank rank => _rank;
@@ -63,8 +65,6 @@ public class PlayingCard
             }
         }
     }
-
-    public string name => _cachedName;
 
     public PlayingCard clone()
     {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ea57a1e01e7884bac98adbacf19c77, type: 3}
   m_Name: USDFormatter
   m_EditorClassIdentifier: 
-  denomination: {fileID: 0}
-  cultureName: 
+  denomination: {fileID: 11400000, guid: 9c8774ce89889e940b26afe3c453db1d, type: 2}
+  cultureName: '"en-US"'

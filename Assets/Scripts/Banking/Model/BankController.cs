@@ -1,70 +1,37 @@
+using System;
 using System.Collections.Generic;
 
-public class BankController : IBanking
+public class BankController : IBankingFacade, IDisposable
 {
-    private float _denomination;
-    private ICurrencyFormatter _formatter = NullCurrencyFormatter.instance;
+    private IWalletController _wallet;
+    private IBetSettingsController _betSettings;
+    private ITransactionLedger _ledger;
+    private int _instanceCount = 0;
 
-    private BankControlledWallet _wallet;
-    private BankControlledLedger _ledger;
-    private BankControlledBetSettings _betSettings;
+    public BankController(
+        IWalletController wallet,
+        IBetSettingsController betSettings,
+        ITransactionLedger ledger
+    ) {
+        _wallet = wallet;
+        _betSettings = betSettings;
+        _ledger = ledger;
 
-    public BankController(float denomination)
-    {
-        _denomination = denomination;
-
-        initializeModels();
+        _ledger.onTransactionCommitted += handleTransactionCommitted;
+        _ledger.onTransactionProgressed += handleTransactionProgressed;
+        _ledger.onTransactionAborted += handleTransactionAborted;
     }
 
-    protected virtual void initializeModels()
+    public void Dispose()
     {
-        _wallet = createWallet();
-        _ledger = createLedger();
-        _betSettings = createBetSettings();
-    }
-
-    protected virtual BankControlledWallet createWallet()
-    {
-        return new BankControlledWallet();
-    }
-
-    protected virtual BankControlledLedger createLedger()
-    {
-        return new BankControlledLedger();
-    }
-
-    protected virtual BankControlledBetSettings createBetSettings()
-    {
-        return new BankControlledBetSettings();
-    }
-
-    public float denomination => _denomination;
-
-    public IWallet wallet => _wallet;
-
-    public ITransactionHistory ledger => _ledger;
-
-    public IBetSettings betSettings => _betSettings;
-
-    public ICurrencyFormatter formatter
-    {
-        get
-        {
-            return _formatter;
-        }
-
-        set
-        {
-            _formatter = value;
-
-            _wallet.formatter = _formatter;
-            _betSettings.formatter = _formatter;
-        }
+        _ledger.onTransactionCommitted -= handleTransactionCommitted;
+        _ledger.onTransactionProgressed -= handleTransactionProgressed;
+        _ledger.onTransactionAborted -= handleTransactionAborted;
     }
 
     public void setBetSteps(List<int> steps)
     {
-        var currentBet = _betSettings.rawBet;
+        var currentBet = _betSettings.activeBet;
 
         _betSettings.setBetSteps(steps);
 
@@ -73,28 +40,53 @@ public class BankController : IBanking
 
     public void depositFunds(float amount)
     {
-        var depositAmount = (int)(amount / _denomination);
-        generateDepositStep(depositAmount);
-        // TODO If a deposit requires no transaction to be active then here we should abort, if necessary
-        // however to do that from a deposit request the abortion has to have a way of communicating out
-        // to the active game.  At
+        var depositValue = (int)(amount / _wallet.denomination);
+        generateDepositAction(Math.Max(depositValue, 0));
     }
 
-    protected virtual void generateDepositStep(int depositAmount)
+    protected virtual void generateDepositAction(int depositValue)
     {
-        addStep(
+        var transaction = new TransactionRecord("Banking", _instanceCount++);
+
+        var step = new TransactionStep(
             "Player",
             "Deposited funds",
             "Balance updated",
-            depositAmount
+            depositValue
         );
+
+        transaction.addStep(step);
+
+        _ledger.appendTransaction(transaction);
     }
 
     public float cashOut()
     {
-        // TODO abort, addStep using -rawBalance
-        // I think the ledger needs a isTransactionPending flag
-        return 0f;
+        // Changes nothing if no transaction is in progress
+        abortTransaction();
+
+        // Cache amount because the withdraw action should zero the balance
+        var withdrawAmount = _wallet.balance * _wallet.denomination;
+
+        generateWithdrawAction(Math.Max(_wallet.balance, 0));
+
+        return Math.Max(withdrawAmount, 0f);
+    }
+
+    protected virtual void generateWithdrawAction(int withdrawValue)
+    {
+        var transaction = new TransactionRecord("Banking", _instanceCount++);
+
+        var step = new TransactionStep(
+            "Player",
+            "Withdrew funds",
+            "Balance zeroed",
+            withdrawValue
+        );
+
+        transaction.addStep(step);
+
+        _ledger.appendTransaction(transaction);
     }
 
     public void increaseBet()
@@ -109,60 +101,58 @@ public class BankController : IBanking
 
     public void submitBet(string gameId)
     {
-        _ledger.startTransaction(gameId);
+        _ledger.startTransaction(gameId, _instanceCount++);
 
-        generateWagerStep();
+        generateWagerAction(_betSettings.activeBet);
     }
 
-    protected virtual void generateWagerStep()
+    protected virtual void generateWagerAction(int wagerValue)
     {
-        addStep(
+        submitAction(
             "Player",
             "Placed wager",
             "Transaction started",
-            -_betSettings.rawBet
+            -wagerValue
         );
     }
 
-    public void addStep(string actor, string action, string outcome, int? adjustment)
+    public void submitAction(string actor, string action, string outcome, int? adjustment)
     {
-        _ledger.addStep(actor, action, outcome, adjustment);
-
-        if (adjustment.HasValue)
-        {
-            processAdjustment(adjustment.Value);
-        }
-    }
-
-    protected virtual void processAdjustment(int adjustment)
-    {
-        if (adjustment < 0)
-        {
-            _wallet.addWager(-adjustment);
-        }
+        _ledger.progressTransaction(actor, action, outcome, adjustment);
     }
 
     public void finalizeTransaction()
     {
         _ledger.finalizeTransaction();
-
-        _wallet.finalizeWager();
-
-        processCompletedTransaction(_ledger.lastCommittedTransaction);
-    }
-
-    protected virtual void processCompletedTransaction(ITransactionRecord lastTransaction)
-    {
-        if (lastTransaction == null)
-        {
-            return;
-        }
-
-        _wallet.adjustBalance(lastTransaction.winAmount);
     }
 
     public void abortTransaction()
     {
-        // TODO addStep -current payout, finalize step and wager
+        _ledger.abortTransaction();
+    }
+
+    protected virtual void handleTransactionCommitted(object sender, EventArgs e)
+    {
+        _wallet.resolveWager();
+
+        var lastTransaction = _ledger.lastCommittedTransaction;
+
+        if (lastTransaction == null) return;
+
+        _wallet.adjustCredit(lastTransaction.winAmount);
+    }
+
+    protected virtual void handleTransactionProgressed(object sender, EventArgs e)
+    {
+        var pendingTransaction = _ledger.inProgressTransaction;
+
+        if (pendingTransaction == null) return;
+
+        _wallet.setWager(-pendingTransaction.wagerAmount);
+    }
+
+    protected virtual void handleTransactionAborted(object sender, EventArgs e)
+    {
+        _wallet.resolveWager();
     }
 }

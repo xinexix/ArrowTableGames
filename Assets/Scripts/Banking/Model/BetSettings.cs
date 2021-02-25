@@ -1,58 +1,54 @@
 using System;
 using System.Collections.Generic;
 
-public class BankControlledBetSettings : IBetSettings
+public class BetSettings : IBetSettingsController
 {
-    private IReadOnlyList<int> _betSteps = new List<int>();
+    private float _denomination;
+    private IReadOnlyList<int> _betSteps = new List<int>().AsReadOnly();
     private int _betIndex = 0;
-    private ICurrencyFormatter _formatter = NullCurrencyFormatter.instance;
 
-    public ICurrencyFormatter formatter
+    public BetSettings(float denomination)
     {
-        get
-        {
-            return _formatter;
-        }
-        set
-        {
-            _formatter = value;
-
-            onBetChanged?.Invoke(this, EventArgs.Empty);
-        }
+        _denomination = denomination;
     }
+
+    public float denomination => _denomination;
+
+    public int activeBet => _betIndex < _betSteps.Count ? _betSteps[_betIndex] : 0;
+
+    public event EventHandler onActiveBetChanged;
 
     public IReadOnlyList<int> betSteps => _betSteps;
 
     public event EventHandler onBetStepsChanged;
 
-    public int rawBet => _betIndex < _betSteps.Count ? _betSteps[_betIndex] : 0;
-
-    public string formattedBet => formatter.format(rawBet);
-
-    public event EventHandler onBetChanged;
-
     public bool isMinBet => _betIndex == 0;
 
-    public bool isMaxBet => _betIndex == _betSteps.Count - 1;
+    public bool isMaxBet => _betIndex >= _betSteps.Count - 1;
 
     public void setBetSteps(List<int> steps)
     {
+        if (steps == null)
+        {
+            steps = new List<int>();
+        }
+
         steps.Sort();
         _betSteps = steps.AsReadOnly();
         _betIndex = 0;
 
         onBetStepsChanged?.Invoke(this, EventArgs.Empty);
-        onBetChanged?.Invoke(this, EventArgs.Empty);
+        onActiveBetChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void increaseBet()
     {
-        updateBetIndex(Math.Min(_betIndex + 1, _betSteps.Count));
+        setBetIndex(_betIndex + 1);
     }
 
     public void decreaseBet()
     {
-        updateBetIndex(Math.Max(_betIndex - 1, 0));
+        setBetIndex(_betIndex - 1);
     }
 
     public void setBetIndex(int index)
@@ -81,7 +77,7 @@ public class BankControlledBetSettings : IBetSettings
         {
             _betIndex = newIndex;
 
-            onBetChanged?.Invoke(this, EventArgs.Empty);
+            onActiveBetChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

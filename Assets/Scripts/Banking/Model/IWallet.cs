@@ -2,11 +2,14 @@ using System;
 
 public interface IWallet
 {
-    int rawBalance { get; }
-    string formattedBalance { get; }
+    float denomination { get; }
+
+    int credit { get; }
+    event EventHandler onCreditChanged;
+
+    int balance { get; }
     event EventHandler onBalanceChanged;
 
-    int rawWager { get; }
-    string formattedWager { get; }
+    int wager { get; }
     event EventHandler onWagerChanged;
 }

@@ -6,7 +6,7 @@ public class TransactionStep : ITransactionStep
     private string _actor;
     private string _action;
     private string _outcome;
-    private int _adjustment = 0;
+    private int _adjustment;
 
     public TransactionStep(string actor, string action, string outcome, int? adjustment)
     {
@@ -15,10 +15,7 @@ public class TransactionStep : ITransactionStep
         _action = action;
         _outcome = outcome;
 
-        if (adjustment.HasValue)
-        {
-            _adjustment = adjustment.Value;
-        }
+        _adjustment = adjustment.HasValue ? adjustment.Value : 0;
     }
 
     public DateTime timestamp => _timestamp;

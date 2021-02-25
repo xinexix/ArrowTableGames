@@ -1,6 +1,6 @@
-public class NullCurrencyFormatter : ICurrencyFormatter
+public class IntegerCurrencyFormatter : ICurrencyFormatter
 {
-    private static ICurrencyFormatter _instance = new NullCurrencyFormatter();
+    private static ICurrencyFormatter _instance = new IntegerCurrencyFormatter();
 
     public static ICurrencyFormatter instance => _instance;
 

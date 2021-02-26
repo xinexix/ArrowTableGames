@@ -10,7 +10,7 @@ public class CurrencyFormatterSO : ScriptableObject
 
     public ICurrencyFormatter formatter => _formatter;
 
-    public void Awake()
+    public void OnEnable()
     {
         _formatter = new CultureCurrencyFormatter(denomination.value, cultureName);
     }

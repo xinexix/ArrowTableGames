@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(TextFieldDecimalInput))]
 public class BankingDialogController : MonoBehaviour, IBankingDialog
 {
     public IProvider<IWalletController> walletProvider;
 
-    public BaseFundAmount fundValue;
+    private IDecimalInput _depositInput;
 
     public bool areFundsPending => false;
 
@@ -17,6 +18,7 @@ public class BankingDialogController : MonoBehaviour, IBankingDialog
 
     private void Start()
     {
+        _depositInput = GetComponent<IDecimalInput>();
     }
 
     public void show()
@@ -27,5 +29,15 @@ public class BankingDialogController : MonoBehaviour, IBankingDialog
     public void hide()
     {
 
+    }
+
+    public void acceptDeposit()
+    {
+
+    }
+
+    public void acceptWithdrawal()
+    {
+        
     }
 }

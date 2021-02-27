@@ -7,9 +7,9 @@ public class ShowOnActiveGame : MonoBehaviour
 
     public UniqueIdSO comparisonId;
 
-    // Start is called before the first frame update
     private void Start()
     {
+        // Hide the owner initially
         gameObject.SetActive(false);
 
         if (lobbyController == null)

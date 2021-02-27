@@ -13,13 +13,11 @@ public class LobbyController : MonoBehaviour
 
     public GameObject activeGameContainer;
 
-    // Start is called before the first frame update
     private void Start()
     {
 
     }
 
-    // Update is called once per frame
     private void Update()
     {
 
@@ -29,7 +27,6 @@ public class LobbyController : MonoBehaviour
     {
         exitGame();
 
-        // TODO I think I want a base game behavior and instantiate specifically to that
         _activeGame = Instantiate<GameController>(prefab, activeGameContainer.transform);
 
         onGameStarted?.Invoke(this, EventArgs.Empty);

@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <remarks>
+/// It appears I can use interfaces in the RequireComponent attribute, and this will protect
+/// against removing components that satisfy those requirements.  But of course Unity
+/// can't auto-add components to satisfy these requirements.  There is also no Inspector warning,
+/// which I was expecting, and thus I'm opting to reference the behaviors directly.
+/// </remarks>
 [RequireComponent(typeof(WalletProvider))]
 [RequireComponent(typeof(BetSettingsProvider))]
 [RequireComponent(typeof(TransactionLedgerProvider))]

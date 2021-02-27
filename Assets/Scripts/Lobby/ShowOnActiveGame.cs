@@ -10,14 +10,15 @@ public class ShowOnActiveGame : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        gameObject.SetActive(false);
+
         if (lobbyController == null)
         {
-            gameObject.SetActive(false);
             return;
         }
 
         lobbyController.onGameStarted += handleGameStarted;
-        lobbyController.onGameExited += handleGameExisted;
+        lobbyController.onGameExited += handleGameExited;
     }
 
     private void handleGameStarted(object sender, EventArgs e)
@@ -27,7 +28,7 @@ public class ShowOnActiveGame : MonoBehaviour
         gameObject.SetActive(activeGameId == comparisonId);
     }
 
-    private void handleGameExisted(object sender, EventArgs e)
+    private void handleGameExited(object sender, EventArgs e)
     {
         gameObject.SetActive(false);
     }

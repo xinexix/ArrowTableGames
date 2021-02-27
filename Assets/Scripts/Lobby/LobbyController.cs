@@ -36,7 +36,7 @@ public class LobbyController : MonoBehaviour
     {
         if (_activeGame == null) return;
 
-        Destroy(_activeGame);
+        Destroy(_activeGame.gameObject);
         _activeGame = null;
 
         onGameExited?.Invoke(this, EventArgs.Empty);

@@ -1654,7 +1654,7 @@ PrefabInstance:
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GameController, Assembly-CSharp
+      value: GameFacade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4388804397244943777, guid: c62068d365558d94eb78998299f78506,
         type: 3}
@@ -1975,7 +1975,7 @@ GameObject:
   - component: {fileID: 856702051}
   - component: {fileID: 856702050}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AcceptLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3427,7 +3427,7 @@ GameObject:
   - component: {fileID: 1568717206}
   - component: {fileID: 1568717205}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: WarningMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3950,7 +3950,7 @@ GameObject:
   - component: {fileID: 1945415107}
   - component: {fileID: 1945415106}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CancelLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4194,7 +4194,7 @@ PrefabInstance:
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GameController, Assembly-CSharp
+      value: GameFacade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4388804397244943777, guid: c62068d365558d94eb78998299f78506,
         type: 3}

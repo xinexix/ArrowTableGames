@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class AbortPrompt : MonoBehaviour
+public class AbortHandler : MonoBehaviour
 {
-    private GameController _pendingGame;
+    private GameFacade _pendingGame;
 
     public LobbyController lobbyController;
 
@@ -12,7 +12,7 @@ public class AbortPrompt : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void requestNewGame(GameController prefab)
+    public void requestNewGame(GameFacade game)
     {
         // This likely isn't set but this ensures a known state
         _pendingGame = null;
@@ -21,19 +21,19 @@ public class AbortPrompt : MonoBehaviour
 
         if (activeGame == null)
         {
-            lobbyController.startGame(prefab);
+            lobbyController.startGame(game);
         }
-        else if (activeGame.uniqueId == prefab.uniqueId)
+        else if (activeGame.uniqueId == game.uniqueId)
         {
             lobbyController.returnToActiveGame();
         }
         else if (!activeGame.isInProgress)
         {
-            lobbyController.startGame(prefab);
+            lobbyController.startGame(game);
         }
         else
         {
-            _pendingGame = prefab;
+            _pendingGame = game;
             gameObject.SetActive(true);
         }
     }

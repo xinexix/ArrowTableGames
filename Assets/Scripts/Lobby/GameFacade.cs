@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameFacade : MonoBehaviour
 {
     [SerializeField]
     private UniqueIdSO _uniqueId;
@@ -9,14 +9,4 @@ public class GameController : MonoBehaviour
     public UniqueIdSO uniqueId => _uniqueId;
 
     public bool isInProgress => true;
-
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
 }

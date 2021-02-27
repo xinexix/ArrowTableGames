@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class LobbyController : MonoBehaviour
 {
-    private GameController _activeGame;
+    private GameFacade _activeGame;
 
-    public GameController activeGame => _activeGame;
+    public GameFacade activeGame => _activeGame;
 
     public event EventHandler onGameStarted;
 
@@ -13,21 +13,11 @@ public class LobbyController : MonoBehaviour
 
     public GameObject activeGameContainer;
 
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
-
-    public void startGame(GameController prefab)
+    public void startGame(GameFacade game)
     {
         exitGame();
 
-        _activeGame = Instantiate<GameController>(prefab, activeGameContainer.transform);
+        _activeGame = Instantiate<GameFacade>(game, activeGameContainer.transform);
 
         onGameStarted?.Invoke(this, EventArgs.Empty);
     }

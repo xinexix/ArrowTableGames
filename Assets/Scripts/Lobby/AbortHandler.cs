@@ -6,10 +6,12 @@ public class AbortHandler : MonoBehaviour
 
     public LobbyController lobbyController;
 
+    public GameObject abortPromptRoot;
+
     private void Start()
     {
-        // Hide the owner initially
-        gameObject.SetActive(false);
+        // Hide the prompt initially
+        abortPromptRoot.gameObject.SetActive(false);
     }
 
     public void requestNewGame(GameFacade game)
@@ -34,13 +36,13 @@ public class AbortHandler : MonoBehaviour
         else
         {
             _pendingGame = game;
-            gameObject.SetActive(true);
+            abortPromptRoot.gameObject.SetActive(true);
         }
     }
 
     public void acceptAbort()
     {
-        gameObject.SetActive(false);
+        abortPromptRoot.gameObject.SetActive(false);
 
         lobbyController.startGame(_pendingGame);
 
@@ -49,7 +51,7 @@ public class AbortHandler : MonoBehaviour
 
     public void cancelAbort()
     {
-        gameObject.SetActive(false);
+        abortPromptRoot.gameObject.SetActive(false);
         _pendingGame = null;
     }
 }

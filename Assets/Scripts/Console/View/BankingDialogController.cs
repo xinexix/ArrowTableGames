@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TextFieldDecimalInput))]
-public class BankingDialogController : MonoBehaviour, IBankingDialog
+public class BankingDialogController : BaseProvider<IBankingDialog>, IBankingDialog
 {
     private IDecimalInput _depositInput;
     private ICurrencyFormatter _formatter;
@@ -21,13 +21,15 @@ public class BankingDialogController : MonoBehaviour, IBankingDialog
 
     public bool isShowing => gameObject.activeSelf;
 
-    public bool areFundsPending => !Mathf.Approximately(_depositInput.value, 0f);
+    public bool isDepositPending => !Mathf.Approximately(_depositInput.value, 0f);
 
     public event EventHandler<AmountEventArgs> onDepositRequested;
 
     public event EventHandler onCashoutRequested;
 
     public event EventHandler onDialogHidden;
+
+    public override IBankingDialog value => this;
 
     private void Awake()
     {

@@ -2,11 +2,11 @@ using System;
 
 public class AmountEventArgs : EventArgs
 {
-    private int _amount;
+    private float _amount;
 
-    public int amount => _amount;
+    public float amount => _amount;
 
-    public AmountEventArgs(int amount)
+    public AmountEventArgs(float amount)
     {
         _amount = amount;
     }

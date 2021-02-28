@@ -1,6 +1,7 @@
 using System;
-using TMPro;
+using System.Globalization;
 using UnityEngine;
+using TMPro;
 
 public class TextFieldDecimalInput : BaseDecimalInput
 {
@@ -10,13 +11,23 @@ public class TextFieldDecimalInput : BaseDecimalInput
 
     public override event EventHandler onValueChanged;
 
-    public void updateInput(TMP_Text inputText)
+    public TMP_InputField inputField;
+
+    private void OnEnable()
     {
-        var input = inputText.text;
+        inputField?.onValueChanged.AddListener(updateInput);
+    }
 
-        inputText.text = "007";
+    private void OnDisable()
+    {
+        inputField?.onValueChanged.RemoveListener(updateInput);
+    }
 
-        Debug.Log("TEXT = " + input);
+    private void updateInput(string input)
+    {
+        var parsedValue = float.Parse(input, CultureInfo.InvariantCulture);
+
+        updateValue(Math.Max(parsedValue, 0f));
     }
 
     public override void resetValue()
@@ -26,7 +37,9 @@ public class TextFieldDecimalInput : BaseDecimalInput
 
     private void updateValue(float value)
     {
-        _value = Math.Max(value, 0f);
+        if (Mathf.Approximately(value, _value)) return;
+
+        _value = value;
 
         onValueChanged?.Invoke(this, EventArgs.Empty);
     }

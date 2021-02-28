@@ -5399,18 +5399,7 @@ MonoBehaviour:
   m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2096734949}
-        m_MethodName: updateInput
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 318886056}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -6104,6 +6093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e924da99a5a3ffc4c992287b9f058b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputField: {fileID: 1812586956}
 --- !u!1 &2118633487
 GameObject:
   m_ObjectHideFlags: 0

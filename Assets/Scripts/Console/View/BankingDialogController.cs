@@ -1,14 +1,27 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(TextFieldDecimalInput))]
 public class BankingDialogController : MonoBehaviour, IBankingDialog
 {
-    public IProvider<IWalletController> walletProvider;
-
     private IDecimalInput _depositInput;
+    private ICurrencyFormatter _formatter;
 
-    public bool areFundsPending => false;
+    public TMP_Text denomText;
+
+    public ICurrencyFormatter currencyFormatter
+    {
+        get => _formatter;
+        set
+        {
+            _formatter = value;
+        }
+    }
+
+    public bool isShowing => gameObject.activeSelf;
+
+    public bool areFundsPending => !Mathf.Approximately(_depositInput.value, 0f);
 
     public event EventHandler<AmountEventArgs> onDepositRequested;
 
@@ -19,25 +32,47 @@ public class BankingDialogController : MonoBehaviour, IBankingDialog
     private void Start()
     {
         _depositInput = GetComponent<IDecimalInput>();
+
+        hide();
     }
 
     public void show()
     {
+        if (isShowing) return;
 
+        if (denomText != null)
+        {
+            denomText.text = _formatter.format(1);
+        }
+
+        gameObject.SetActive(true);
     }
 
     public void hide()
     {
+        if (!isShowing) return;
 
+        gameObject.SetActive(false);
+
+        _depositInput.resetValue();
+
+        onDialogHidden?.Invoke(this, EventArgs.Empty);
     }
 
     public void acceptDeposit()
     {
+        var amount = _depositInput.value;
+        if (Mathf.Approximately(amount, 0f)) return;
 
+        onDepositRequested?.Invoke(this, new AmountEventArgs(amount));
+
+        _depositInput.resetValue();
     }
 
     public void acceptWithdrawal()
     {
-        
+        onCashoutRequested?.Invoke(this, EventArgs.Empty);
+
+        _depositInput.resetValue();
     }
 }

@@ -11,6 +11,8 @@ using UnityEngine;
 [RequireComponent(typeof(TransactionLedgerProvider))]
 public class ConsoleController : MonoBehaviour
 {
+    public BaseSOProvider<ICurrencyFormatter> currencyFormatter;
+
     private IBankingFacade _bankingFacade;
 
     private void Start()

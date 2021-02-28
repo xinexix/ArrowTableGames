@@ -7,7 +7,7 @@ public class BetSettingsProvider : BaseProvider<IBetSettingsController>
 
     public override IBetSettingsController value => _betSettings;
 
-    private void Start()
+    private void Awake()
     {
         var denomProvider = GetComponent<DenomProvider>();
 

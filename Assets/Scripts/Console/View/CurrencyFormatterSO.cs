@@ -15,11 +15,22 @@ public class CurrencyFormatterSO : BaseSOProvider<ICurrencyFormatter>
     public FloatSO denomination;
     public string cultureName;
 
-    public override ICurrencyFormatter value => _formatter;
-
-    public void OnEnable()
+    public override ICurrencyFormatter value
     {
-        _formatter = new UsdCurrencyFormatter(denomination.value);
-        // _formatter = new CultureCurrencyFormatter(denomination.value, cultureName);
+        get
+        {
+            /// <remarks>
+            /// It's been a while since I've dealt with the singleton pattern in C#;
+            /// I vaguely recall there was a better method for thread safety...but
+            /// I don't think that is an issue in Unity?
+            /// </remarks>
+            if (_formatter == null)
+            {
+                _formatter = new UsdCurrencyFormatter(denomination.value);
+                // _formatter = new CultureCurrencyFormatter(denomination.value, cultureName);
+            }
+
+            return _formatter;
+        }
     }
 }

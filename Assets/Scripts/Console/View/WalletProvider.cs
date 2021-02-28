@@ -7,7 +7,7 @@ public class WalletProvider : BaseProvider<IWalletController>
 
     public override IWalletController value => _wallet;
 
-    private void Start()
+    private void Awake()
     {
         var denomProvider = GetComponent<DenomProvider>();
 

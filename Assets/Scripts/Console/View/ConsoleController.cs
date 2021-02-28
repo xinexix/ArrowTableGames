@@ -15,7 +15,7 @@ public class ConsoleController : MonoBehaviour
 
     private IBankingFacade _bankingFacade;
 
-    private void Start()
+    private void Awake()
     {
         var wallet = GetComponent<IProvider<IWalletController>>().value;
         var betSettings = GetComponent<IProvider<IBetSettingsController>>().value;

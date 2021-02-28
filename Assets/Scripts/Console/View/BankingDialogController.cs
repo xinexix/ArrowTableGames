@@ -29,7 +29,7 @@ public class BankingDialogController : MonoBehaviour, IBankingDialog
 
     public event EventHandler onDialogHidden;
 
-    private void Start()
+    private void Awake()
     {
         _depositInput = GetComponent<IDecimalInput>();
 

@@ -6,7 +6,7 @@ public class TransactionLedgerProvider : BaseProvider<ITransactionLedger>
 
     public override ITransactionLedger value => _ledger;
 
-    private void Start()
+    private void Awake()
     {
         _ledger = new TransactionLedger();
     }

@@ -15,7 +15,7 @@ public class ConsoleController : MonoBehaviour
     private ICurrencyFormatter _formatter;
     private IDialogScrim _dialogScrim;
     private IBankingDialog _bankingDialog;
-    // private IAbortDialog _abortDialog;
+    private IAbortDialog _abortDialog;
     // private IConsoleBar _consoleBar;
     private IBankingFacade _bankingFacade;
 
@@ -25,11 +25,14 @@ public class ConsoleController : MonoBehaviour
 
     public BaseProvider<IBankingDialog> bankingDialogProvider;
 
+    public BaseProvider<IAbortDialog> abortDialogProvider;
+
     private void Awake()
     {
         _formatter = currencyFormatter.value;
         _dialogScrim = dialogScrimProvider.value;
         _bankingDialog = bankingDialogProvider.value;
+        _abortDialog = abortDialogProvider.value;
 
         var wallet = GetComponent<IProvider<IWalletController>>().value;
         var betSettings = GetComponent<IProvider<IBetSettingsController>>().value;
@@ -44,14 +47,22 @@ public class ConsoleController : MonoBehaviour
 
         _dialogScrim.onInteracted += handleScrimInteracted;
 
-        _bankingDialog.onDialogHidden += handleBankingHidden;
+        _bankingDialog.onDialogHidden += handleDialogHidden;
+        _abortDialog.onDialogHidden += handleDialogHidden;
+
+        _bankingDialog.onDepositRequested += handleDepositRequest;
+        _bankingDialog.onCashoutRequested += handleCashoutRequest;
     }
 
     private void OnDisable()
     {
         _dialogScrim.onInteracted -= handleScrimInteracted;
 
-        _bankingDialog.onDialogHidden -= handleBankingHidden;
+        _bankingDialog.onDialogHidden -= handleDialogHidden;
+        _abortDialog.onDialogHidden -= handleDialogHidden;
+
+        _bankingDialog.onDepositRequested -= handleDepositRequest;
+        _bankingDialog.onCashoutRequested -= handleCashoutRequest;
     }
 
     private void handleScrimInteracted(object sender, EventArgs e)
@@ -60,24 +71,21 @@ public class ConsoleController : MonoBehaviour
         {
             _bankingDialog.hide();
         }
+
+        if (_abortDialog.isShowing)
+        {
+            _abortDialog.hide();
+        }
     }
 
-    // TODO temp
-    public void processShowBanking()
+    private void handleDialogHidden(object sender, EventArgs e)
     {
-        _bankingDialog.show();
-
-        updateScrim();
+        updateScrimVisibility();
     }
 
-    private void handleBankingHidden(object sender, EventArgs e)
+    private void updateScrimVisibility()
     {
-        updateScrim();
-    }
-
-    private void updateScrim()
-    {
-        var shouldShow = _bankingDialog.isShowing;
+        var shouldShow = _bankingDialog.isShowing || _abortDialog.isShowing;
 
         if (shouldShow)
         {
@@ -87,5 +95,30 @@ public class ConsoleController : MonoBehaviour
         {
             _dialogScrim.hide();
         }
+    }
+
+    private void showBankingDialog(object sender, EventArgs e)
+    {
+        _bankingDialog.show();
+        _dialogScrim.show();
+    }
+
+    private void handleDepositRequest(object sender, AmountEventArgs e)
+    {
+        _bankingFacade.depositFunds(e.amount);
+    }
+
+    private void handleCashoutRequest(object sender, EventArgs e)
+    {
+        var amount = _bankingFacade.cashOut();
+
+        // Hack just for simplicity
+        var formattedAmount = amount.ToString("C");
+        Debug.Log($"Ticket printed for {formattedAmount}");
+    }
+
+    private void hideBankingDialog(object sender, EventArgs e)
+    {
+        _bankingDialog.hide();
     }
 }

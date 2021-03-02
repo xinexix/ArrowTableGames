@@ -487,19 +487,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117791838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1405423383}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: acceptAbort
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &117791838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,7 +1360,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 336975659}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -1384,21 +1372,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 234307196}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1763890990}
-        m_TargetAssemblyTypeName: ConsoleController, Assembly-CSharp
-        m_MethodName: processShowBanking
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2233,7 +2209,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1405423383}
+      objectReference: {fileID: 0}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -3851,19 +3827,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1288091670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1405423383}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: cancelAbort
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1288091670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4257,11 +4221,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405423379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8a63a918de1e84781ace8f9d20ae5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 40cd2db96b8a27e4c838ae17e65df1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyController: {fileID: 970474306}
-  abortPromptRoot: {fileID: 1405423379}
 --- !u!1 &1409331816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,6 +5134,7 @@ MonoBehaviour:
   currencyFormatter: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb, type: 2}
   dialogScrimProvider: {fileID: 2903819}
   bankingDialogProvider: {fileID: 2096734948}
+  abortDialogProvider: {fileID: 1405423383}
 --- !u!114 &1763890991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6297,7 +6260,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1405423383}
+      objectReference: {fileID: 0}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

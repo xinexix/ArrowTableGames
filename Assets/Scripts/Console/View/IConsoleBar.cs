@@ -2,6 +2,10 @@ using System;
 
 public interface IConsoleBar
 {
+    ICurrencyFormatter currencyFormatter { get; set; }
+    IWallet wallet { get; set; }
+    IBetSettings betSettings { get; set; }
+
     bool isLobbyButtonOn { get; }
     event EventHandler onAccessLobbyRequested;
     void showLobbyButton(bool show);

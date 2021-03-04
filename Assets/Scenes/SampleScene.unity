@@ -5009,10 +5009,6 @@ GameObject:
   - component: {fileID: 1763890988}
   - component: {fileID: 1763890987}
   - component: {fileID: 1763890986}
-  - component: {fileID: 1763890992}
-  - component: {fileID: 1763890994}
-  - component: {fileID: 1763890993}
-  - component: {fileID: 1763890991}
   - component: {fileID: 1763890990}
   m_Layer: 5
   m_Name: ConsoleCanvas
@@ -5116,59 +5112,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2addd14a57f0104d92f92c1781f2bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyFormatter: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb, type: 2}
+  currencyFormatterProvider: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb,
+    type: 2}
+  walletProvider: {fileID: 11400000, guid: bc1d1c563d07d5640a1562f240344a4e, type: 2}
+  betSettingsProvider: {fileID: 11400000, guid: 3fda846cca4027f409eed92f6c4b9fb9,
+    type: 2}
+  ledgerProvider: {fileID: 11400000, guid: b6ee3ae08f73f514b855c904a2e3e729, type: 2}
   dialogScrimProvider: {fileID: 2903819}
   bankingDialogProvider: {fileID: 2096734948}
   abortDialogProvider: {fileID: 1405423383}
---- !u!114 &1763890991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80db2f66d2679445ac0b0203cbb459b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1763890992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 214c37a3cd3eea44a9be371a27844f2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  denomination: {fileID: 11400000, guid: 9c8774ce89889e940b26afe3c453db1d, type: 2}
---- !u!114 &1763890993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880dffe071f4e164ca4399b02454377c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1763890994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9278c4b470cce4940b2005527475f2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1775247247
 GameObject:
   m_ObjectHideFlags: 0

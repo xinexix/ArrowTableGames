@@ -3,9 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Script Objects/Bet Settings Model")]
 public class BetSettingsSO : BaseSOProvider<IBetSettingsController>
 {
-    public BaseSOProvider<float> denomination;
-
     private IBetSettingsController _betSettings;
+
+    public BaseSOProvider<float> denomination;
 
     public override IBetSettingsController value
     {

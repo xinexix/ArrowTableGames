@@ -3,9 +3,9 @@
 [CreateAssetMenu(menuName = "Script Objects/Wallet Model")]
 public class WalletSO : BaseSOProvider<IWalletController>
 {
-    public BaseSOProvider<float> denomination;
-
     private IWalletController _wallet;
+
+    public BaseSOProvider<float> denomination;
 
     public override IWalletController value
     {

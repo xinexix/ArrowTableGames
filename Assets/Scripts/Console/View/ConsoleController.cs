@@ -1,15 +1,6 @@
 using System;
 using UnityEngine;
 
-/// <remarks>
-/// It appears I can use interfaces in the RequireComponent attribute, and this will protect
-/// against removing components that satisfy those requirements.  But of course Unity
-/// can't auto-add components to satisfy these requirements.  There is also no Inspector warning,
-/// which I was expecting, and thus I'm opting to reference the behaviors directly.
-/// </remarks>
-[RequireComponent(typeof(WalletProvider))]
-[RequireComponent(typeof(BetSettingsProvider))]
-[RequireComponent(typeof(TransactionLedgerProvider))]
 public class ConsoleController : MonoBehaviour
 {
     private ICurrencyFormatter _formatter;
@@ -19,26 +10,28 @@ public class ConsoleController : MonoBehaviour
     // private IConsoleBar _consoleBar;
     private IBankingFacade _bankingFacade;
 
-    public BaseSOProvider<ICurrencyFormatter> currencyFormatter;
+    public BaseSOProvider<ICurrencyFormatter> currencyFormatterProvider;
+    public BaseSOProvider<IWalletController> walletProvider;
+    public BaseSOProvider<IBetSettingsController> betSettingsProvider;
+    public BaseSOProvider<ITransactionLedger> ledgerProvider;
 
     public BaseProvider<IDialogScrim> dialogScrimProvider;
-
     public BaseProvider<IBankingDialog> bankingDialogProvider;
-
     public BaseProvider<IAbortDialog> abortDialogProvider;
 
     private void Awake()
     {
-        _formatter = currencyFormatter.value;
+        _formatter = currencyFormatterProvider.value;
+
+        var wallet = walletProvider.value;
+        var betSettings = betSettingsProvider.value;
+        var ledger = ledgerProvider.value;
+
+        _bankingFacade = new BankController(wallet, betSettings, ledger);
+
         _dialogScrim = dialogScrimProvider.value;
         _bankingDialog = bankingDialogProvider.value;
         _abortDialog = abortDialogProvider.value;
-
-        var wallet = GetComponent<IProvider<IWalletController>>().value;
-        var betSettings = GetComponent<IProvider<IBetSettingsController>>().value;
-        var ledger = GetComponent<IProvider<ITransactionLedger>>().value;
-
-        _bankingFacade = new BankController(wallet, betSettings, ledger);
     }
 
     private void OnEnable()

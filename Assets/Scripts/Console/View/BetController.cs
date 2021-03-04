@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BetController : BaseProvider<IBetControl>, IBetControl
+// TODO uncomment and finish impl
+public class BetController // : BaseProvider<IBetControl>, IBetControl
 {
-    private bool _isVisible = true;
-    private bool _isEnabled = false;
+    private bool _visible = true;
+    private bool _enabled = false;
 
     public Button betUpButton;
     public Button betDownButton;
@@ -19,7 +20,8 @@ public class BetController : BaseProvider<IBetControl>, IBetControl
     public event EventHandler onStateChanged;
     public event EventHandler onValueChanged;
 
-    public override IBetControl value => this;
+    // TODO uncomment
+    // public override IBetControl value => this;
 
     public bool isVisible
     {

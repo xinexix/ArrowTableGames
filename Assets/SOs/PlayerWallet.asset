@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559f91e5746aa454cb7f3dd4adacb703, type: 3}
+  m_Script: {fileID: 11500000, guid: 1252cdbc8943e2c4bb739d694ce29572, type: 3}
   m_Name: PlayerWallet
   m_EditorClassIdentifier: 
   denomination: {fileID: 11400000, guid: 9c8774ce89889e940b26afe3c453db1d, type: 2}

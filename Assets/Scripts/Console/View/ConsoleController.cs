@@ -3,32 +3,30 @@ using UnityEngine;
 
 public class ConsoleController : MonoBehaviour
 {
-    private ICurrencyFormatter _formatter;
+    private IBankingFacade _bankingFacade;
+    private IControlStrip _consoleStrip;
     private IDialogScrim _dialogScrim;
     private IBankingDialog _bankingDialog;
     private IAbortDialog _abortDialog;
-    // private IConsoleBar _consoleBar;
-    private IBankingFacade _bankingFacade;
 
-    public BaseSOProvider<ICurrencyFormatter> currencyFormatterProvider;
     public BaseSOProvider<IWalletController> walletProvider;
     public BaseSOProvider<IBetSettingsController> betSettingsProvider;
     public BaseSOProvider<ITransactionLedger> ledgerProvider;
 
+    public BaseProvider<IControlStrip> controlStripProvider;
     public BaseProvider<IDialogScrim> dialogScrimProvider;
     public BaseProvider<IBankingDialog> bankingDialogProvider;
     public BaseProvider<IAbortDialog> abortDialogProvider;
 
     private void Awake()
     {
-        _formatter = currencyFormatterProvider.value;
-
         var wallet = walletProvider.value;
         var betSettings = betSettingsProvider.value;
         var ledger = ledgerProvider.value;
 
         _bankingFacade = new BankController(wallet, betSettings, ledger);
 
+        _consoleStrip = controlStripProvider.value;
         _dialogScrim = dialogScrimProvider.value;
         _bankingDialog = bankingDialogProvider.value;
         _abortDialog = abortDialogProvider.value;
@@ -36,8 +34,6 @@ public class ConsoleController : MonoBehaviour
 
     private void OnEnable()
     {
-        _bankingDialog.currencyFormatter = _formatter;
-
         _dialogScrim.onInteracted += handleScrimInteracted;
 
         _bankingDialog.onDialogHidden += handleDialogHidden;

@@ -5214,10 +5214,10 @@ MonoBehaviour:
   betSettingsProvider: {fileID: 11400000, guid: 3fda846cca4027f409eed92f6c4b9fb9,
     type: 2}
   ledgerProvider: {fileID: 11400000, guid: b6ee3ae08f73f514b855c904a2e3e729, type: 2}
-  controlStripProvider: {fileID: 0}
-  dialogScrimProvider: {fileID: 0}
-  bankingDialogProvider: {fileID: 0}
-  abortDialogProvider: {fileID: 0}
+  controlStripProvider: {fileID: 2118633491}
+  dialogScrimProvider: {fileID: 2903819}
+  bankingDialogProvider: {fileID: 2096734948}
+  abortDialogProvider: {fileID: 1405423383}
 --- !u!1 &1775247247
 GameObject:
   m_ObjectHideFlags: 0

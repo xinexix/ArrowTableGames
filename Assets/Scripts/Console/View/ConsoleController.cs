@@ -1,13 +1,15 @@
 using System;
 using UnityEngine;
 
-public class ConsoleController : MonoBehaviour
+public class ConsoleController : MonoBehaviour, IConsoleFacade
 {
     private IBankingFacade _bankingFacade;
-    private IControlStrip _consoleStrip;
+    private IControlStrip _controlStrip;
     private IDialogScrim _dialogScrim;
     private IBankingDialog _bankingDialog;
     private IAbortDialog _abortDialog;
+
+    public event EventHandler onShowLobbyRequested;
 
     public BaseSOProvider<IWalletController> walletProvider;
     public BaseSOProvider<IBetSettingsController> betSettingsProvider;
@@ -15,8 +17,8 @@ public class ConsoleController : MonoBehaviour
 
     public BaseProvider<IControlStrip> controlStripProvider;
     public BaseProvider<IDialogScrim> dialogScrimProvider;
-    public BaseProvider<IBankingDialog> bankingDialogProvider;
     public BaseProvider<IAbortDialog> abortDialogProvider;
+    public BaseProvider<IBankingDialog> bankingDialogProvider;
 
     private void Awake()
     {
@@ -26,14 +28,35 @@ public class ConsoleController : MonoBehaviour
 
         _bankingFacade = new BankController(wallet, betSettings, ledger);
 
-        _consoleStrip = controlStripProvider.value;
+        _controlStrip = controlStripProvider.value;
         _dialogScrim = dialogScrimProvider.value;
-        _bankingDialog = bankingDialogProvider.value;
         _abortDialog = abortDialogProvider.value;
+        _bankingDialog = bankingDialogProvider.value;
+    }
+
+    private void Start()
+    {
+        _controlStrip.onAccessLobbyRequested += handleAccessLobbyRequested;
+    }
+
+    private void handleAccessLobbyRequested(object sender, EventArgs e)
+    {
+        onShowLobbyRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void handleLobbyShown()
+    {
+        _controlStrip.showLobbyButton(false);
+    }
+
+    public void handleGameEntered(string gameId)
+    {
+        _controlStrip.showLobbyButton(true);
     }
 
     private void OnEnable()
     {
+        /*
         _dialogScrim.onInteracted += handleScrimInteracted;
 
         _bankingDialog.onDialogHidden += handleDialogHidden;
@@ -41,10 +64,12 @@ public class ConsoleController : MonoBehaviour
 
         _bankingDialog.onDepositRequested += handleDepositRequest;
         _bankingDialog.onCashoutRequested += handleCashoutRequest;
+        */
     }
 
     private void OnDisable()
     {
+        /*
         _dialogScrim.onInteracted -= handleScrimInteracted;
 
         _bankingDialog.onDialogHidden -= handleDialogHidden;
@@ -52,6 +77,7 @@ public class ConsoleController : MonoBehaviour
 
         _bankingDialog.onDepositRequested -= handleDepositRequest;
         _bankingDialog.onCashoutRequested -= handleCashoutRequest;
+        */
     }
 
     private void handleScrimInteracted(object sender, EventArgs e)

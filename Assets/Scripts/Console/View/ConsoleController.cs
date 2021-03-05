@@ -1,50 +1,62 @@
 using System;
 using UnityEngine;
 
-/// <remarks>
-/// It appears I can use interfaces in the RequireComponent attribute, and this will protect
-/// against removing components that satisfy those requirements.  But of course Unity
-/// can't auto-add components to satisfy these requirements.  There is also no Inspector warning,
-/// which I was expecting, and thus I'm opting to reference the behaviors directly.
-/// </remarks>
-[RequireComponent(typeof(WalletProvider))]
-[RequireComponent(typeof(BetSettingsProvider))]
-[RequireComponent(typeof(TransactionLedgerProvider))]
-public class ConsoleController : MonoBehaviour
+public class ConsoleController : MonoBehaviour, IConsoleFacade
 {
-    private ICurrencyFormatter _formatter;
+    private IBankingFacade _bankingFacade;
+    private IControlStrip _controlStrip;
     private IDialogScrim _dialogScrim;
     private IBankingDialog _bankingDialog;
     private IAbortDialog _abortDialog;
-    // private IConsoleBar _consoleBar;
-    private IBankingFacade _bankingFacade;
 
-    public BaseSOProvider<ICurrencyFormatter> currencyFormatter;
+    public event EventHandler onShowLobbyRequested;
 
+    public BaseSOProvider<IWalletController> walletProvider;
+    public BaseSOProvider<IBetSettingsController> betSettingsProvider;
+    public BaseSOProvider<ITransactionLedger> ledgerProvider;
+
+    public BaseProvider<IControlStrip> controlStripProvider;
     public BaseProvider<IDialogScrim> dialogScrimProvider;
-
-    public BaseProvider<IBankingDialog> bankingDialogProvider;
-
     public BaseProvider<IAbortDialog> abortDialogProvider;
+    public BaseProvider<IBankingDialog> bankingDialogProvider;
 
     private void Awake()
     {
-        _formatter = currencyFormatter.value;
-        _dialogScrim = dialogScrimProvider.value;
-        _bankingDialog = bankingDialogProvider.value;
-        _abortDialog = abortDialogProvider.value;
-
-        var wallet = GetComponent<IProvider<IWalletController>>().value;
-        var betSettings = GetComponent<IProvider<IBetSettingsController>>().value;
-        var ledger = GetComponent<IProvider<ITransactionLedger>>().value;
+        var wallet = walletProvider.value;
+        var betSettings = betSettingsProvider.value;
+        var ledger = ledgerProvider.value;
 
         _bankingFacade = new BankController(wallet, betSettings, ledger);
+
+        _controlStrip = controlStripProvider.value;
+        _dialogScrim = dialogScrimProvider.value;
+        _abortDialog = abortDialogProvider.value;
+        _bankingDialog = bankingDialogProvider.value;
+    }
+
+    private void Start()
+    {
+        _controlStrip.onAccessLobbyRequested += handleAccessLobbyRequested;
+    }
+
+    private void handleAccessLobbyRequested(object sender, EventArgs e)
+    {
+        onShowLobbyRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void handleLobbyShown()
+    {
+        _controlStrip.showLobbyButton(false);
+    }
+
+    public void handleGameEntered(string gameId)
+    {
+        _controlStrip.showLobbyButton(true);
     }
 
     private void OnEnable()
     {
-        _bankingDialog.currencyFormatter = _formatter;
-
+        /*
         _dialogScrim.onInteracted += handleScrimInteracted;
 
         _bankingDialog.onDialogHidden += handleDialogHidden;
@@ -52,10 +64,12 @@ public class ConsoleController : MonoBehaviour
 
         _bankingDialog.onDepositRequested += handleDepositRequest;
         _bankingDialog.onCashoutRequested += handleCashoutRequest;
+        */
     }
 
     private void OnDisable()
     {
+        /*
         _dialogScrim.onInteracted -= handleScrimInteracted;
 
         _bankingDialog.onDialogHidden -= handleDialogHidden;
@@ -63,6 +77,7 @@ public class ConsoleController : MonoBehaviour
 
         _bankingDialog.onDepositRequested -= handleDepositRequest;
         _bankingDialog.onCashoutRequested -= handleCashoutRequest;
+        */
     }
 
     private void handleScrimInteracted(object sender, EventArgs e)

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2903817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946c1711a3a1cdf4aad90a3dd0cd8f70, type: 3}
+  m_Script: {fileID: 11500000, guid: 09c92cdf9974ad74092d4152214b5f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2903820
@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 46535561}
   - component: {fileID: 46535563}
   - component: {fileID: 46535562}
+  - component: {fileID: 46535564}
   m_Layer: 5
   m_Name: BetValue
   m_TagString: Untagged
@@ -406,6 +407,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46535560}
   m_CullTransparentMesh: 0
+--- !u!114 &46535564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46535560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2172a5b9adf2d724ca85ade056a6caf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyFormatterProvider: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb,
+    type: 2}
+  betSettingsProvider: {fileID: 11400000, guid: 3fda846cca4027f409eed92f6c4b9fb9,
+    type: 2}
 --- !u!1 &117791835
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +504,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117791838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1405423383}
+        m_TargetAssemblyTypeName: AbortDialogController, Assembly-CSharp
+        m_MethodName: acceptAbort
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117791838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +736,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 194635223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8916a472f16cd4aafcac9596e5ef20, type: 3}
+  m_Script: {fileID: 11500000, guid: d934c9d1fc67857468a9a1253191c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeButton: {fileID: 1011005749}
@@ -1025,7 +1054,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 275429614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8916a472f16cd4aafcac9596e5ef20, type: 3}
+  m_Script: {fileID: 11500000, guid: d934c9d1fc67857468a9a1253191c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeButton: {fileID: 234307198}
@@ -1508,7 +1537,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 351602738}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1621000222}
+        m_TargetAssemblyTypeName: BetStepController, Assembly-CSharp
+        m_MethodName: acceptBetUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &351602738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3447,7 +3488,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1089102827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8916a472f16cd4aafcac9596e5ef20, type: 3}
+  m_Script: {fileID: 11500000, guid: d934c9d1fc67857468a9a1253191c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeButton: {fileID: 1089102829}
@@ -3569,7 +3610,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1108115559}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1621000222}
+        m_TargetAssemblyTypeName: BetStepController, Assembly-CSharp
+        m_MethodName: acceptBetDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1108115559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3620,6 +3673,7 @@ GameObject:
   - component: {fileID: 1114983444}
   - component: {fileID: 1114983446}
   - component: {fileID: 1114983445}
+  - component: {fileID: 1114983447}
   m_Layer: 5
   m_Name: BalanceValue
   m_TagString: Untagged
@@ -3743,6 +3797,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114983443}
   m_CullTransparentMesh: 0
+--- !u!114 &1114983447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114983443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f01ebfea4f6f4242b34b3d885d388d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyFormatterProvider: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb,
+    type: 2}
+  walletProvider: {fileID: 11400000, guid: bc1d1c563d07d5640a1562f240344a4e, type: 2}
 --- !u!1 &1288091667
 GameObject:
   m_ObjectHideFlags: 0
@@ -3824,7 +3893,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1288091670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1405423383}
+        m_TargetAssemblyTypeName: AbortDialogController, Assembly-CSharp
+        m_MethodName: acceptCancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1288091670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4164,7 +4245,7 @@ RectTransform:
   - {fileID: 1568717204}
   - {fileID: 983602485}
   m_Father: {fileID: 1763890989}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.3}
   m_AnchorMax: {x: 0.75, y: 0.8}
@@ -4218,7 +4299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405423379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40cd2db96b8a27e4c838ae17e65df1cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 85735f01865cad34b9011a7c5ab2cc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1409331816
@@ -4799,6 +4880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1621000221}
+  - component: {fileID: 1621000222}
   m_Layer: 5
   m_Name: BetContainer
   m_TagString: Untagged
@@ -4828,6 +4910,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1621000222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621000220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc04091da1067a4181100e9a16342b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  betSettingsProvider: {fileID: 11400000, guid: 3fda846cca4027f409eed92f6c4b9fb9,
+    type: 2}
+  betUpButton: {fileID: 351602737}
+  betDownButton: {fileID: 1108115558}
 --- !u!1 &1645212069
 GameObject:
   m_ObjectHideFlags: 0
@@ -5009,10 +5107,6 @@ GameObject:
   - component: {fileID: 1763890988}
   - component: {fileID: 1763890987}
   - component: {fileID: 1763890986}
-  - component: {fileID: 1763890992}
-  - component: {fileID: 1763890994}
-  - component: {fileID: 1763890993}
-  - component: {fileID: 1763890991}
   - component: {fileID: 1763890990}
   m_Layer: 5
   m_Name: ConsoleCanvas
@@ -5093,8 +5187,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2903818}
-  - {fileID: 2096734945}
   - {fileID: 1405423380}
+  - {fileID: 2096734945}
   - {fileID: 2118633488}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -5116,59 +5210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2addd14a57f0104d92f92c1781f2bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyFormatter: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb, type: 2}
+  walletProvider: {fileID: 11400000, guid: bc1d1c563d07d5640a1562f240344a4e, type: 2}
+  betSettingsProvider: {fileID: 11400000, guid: 3fda846cca4027f409eed92f6c4b9fb9,
+    type: 2}
+  ledgerProvider: {fileID: 11400000, guid: b6ee3ae08f73f514b855c904a2e3e729, type: 2}
+  controlStripProvider: {fileID: 2118633491}
   dialogScrimProvider: {fileID: 2903819}
   bankingDialogProvider: {fileID: 2096734948}
   abortDialogProvider: {fileID: 1405423383}
---- !u!114 &1763890991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80db2f66d2679445ac0b0203cbb459b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1763890992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 214c37a3cd3eea44a9be371a27844f2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  denomination: {fileID: 11400000, guid: 9c8774ce89889e940b26afe3c453db1d, type: 2}
---- !u!114 &1763890993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880dffe071f4e164ca4399b02454377c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1763890994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763890985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9278c4b470cce4940b2005527475f2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1775247247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5216,7 +5265,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775247247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8916a472f16cd4aafcac9596e5ef20, type: 3}
+  m_Script: {fileID: 11500000, guid: d934c9d1fc67857468a9a1253191c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeButton: {fileID: 732179242}
@@ -5367,6 +5416,7 @@ GameObject:
   - component: {fileID: 1812586958}
   - component: {fileID: 1812586957}
   - component: {fileID: 1812586956}
+  - component: {fileID: 1812586959}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -5529,6 +5579,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812586954}
   m_CullTransparentMesh: 0
+--- !u!114 &1812586959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812586954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01bc790247d4ac4fa72b6279e3d499e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1928402811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,8 +5674,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2096734948}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: acceptWithdrawal
+        m_TargetAssemblyTypeName: BankingDialogController, Assembly-CSharp
+        m_MethodName: acceptCashOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5889,6 +5951,7 @@ GameObject:
   - component: {fileID: 2077108571}
   - component: {fileID: 2077108573}
   - component: {fileID: 2077108572}
+  - component: {fileID: 2077108574}
   m_Layer: 5
   m_Name: DenomValue
   m_TagString: Untagged
@@ -6012,6 +6075,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077108570}
   m_CullTransparentMesh: 0
+--- !u!114 &2077108574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077108570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f954d1b07ca20468677ebb47902bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyFormatterProvider: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb,
+    type: 2}
+  fixedValue: 1
 --- !u!1 &2081692090
 GameObject:
   m_ObjectHideFlags: 0
@@ -6061,7 +6139,6 @@ GameObject:
   - component: {fileID: 2096734945}
   - component: {fileID: 2096734947}
   - component: {fileID: 2096734946}
-  - component: {fileID: 2096734949}
   - component: {fileID: 2096734948}
   m_Layer: 5
   m_Name: BankingDialog
@@ -6085,7 +6162,7 @@ RectTransform:
   - {fileID: 534840872}
   - {fileID: 2081692091}
   m_Father: {fileID: 1763890989}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.3}
   m_AnchorMax: {x: 0.75, y: 0.8}
@@ -6139,23 +6216,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2096734944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6dc22e90bd324149888b51a77eb2f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a97067e989adb4147872052c3c596172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  denomText: {fileID: 2077108572}
---- !u!114 &2096734949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096734944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e924da99a5a3ffc4c992287b9f058b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 1812586956}
+  currencyFormatterProvider: {fileID: 11400000, guid: 3932dfa3837be784685d8441067fd7cb,
+    type: 2}
+  depositInputProvider: {fileID: 1812586959}
 --- !u!1 &2118633487
 GameObject:
   m_ObjectHideFlags: 0
@@ -6167,8 +6233,9 @@ GameObject:
   - component: {fileID: 2118633488}
   - component: {fileID: 2118633490}
   - component: {fileID: 2118633489}
+  - component: {fileID: 2118633491}
   m_Layer: 5
-  m_Name: PlayerConsole
+  m_Name: ControlStrip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6234,6 +6301,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118633487}
   m_CullTransparentMesh: 0
+--- !u!114 &2118633491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118633487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30e44b206d8eb14aab8169fe7191d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyToggleProvider: {fileID: 1089102832}
+  bankingToggleProvider: {fileID: 275429616}
+  betStepProvider: {fileID: 1621000222}
+  autoBetToggleProvider: {fileID: 1775247249}
+  soundToggleProvider: {fileID: 194635225}
 --- !u!1001 &4388804396968964615
 PrefabInstance:
   m_ObjectHideFlags: 0

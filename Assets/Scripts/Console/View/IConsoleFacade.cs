@@ -1,3 +1,5 @@
+using System;
+
 public interface IConsoleFacade
 {
     event EventHandler onShowLobbyRequested;

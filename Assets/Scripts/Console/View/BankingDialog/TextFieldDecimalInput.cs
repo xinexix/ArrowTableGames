@@ -15,10 +15,13 @@ public class TextFieldDecimalInput : BaseProvider<IDecimalInput>, IDecimalInput
 
     public override IDecimalInput value => this;
 
-    private void Start()
+    private void Awake()
     {
         _inputField = GetComponent<TMP_InputField>();
+    }
 
+    private void Start()
+    {
         _inputField.onValueChanged.AddListener(updateInput);
 
         resetValue();

@@ -22,11 +22,14 @@ public class BankingDialogController : BaseProvider<IBankingDialog>, IBankingDia
 
     public override IBankingDialog value => this;
 
-    private void Start()
+    private void Awake()
     {
         _formatter = currencyFormatterProvider.value;
         _depositInput = depositInputProvider.value;
+    }
 
+    private void Start()
+    {
         hide();
     }
 

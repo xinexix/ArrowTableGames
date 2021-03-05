@@ -2,30 +2,30 @@ using System;
 
 public interface IControlStrip
 {
-    int temp { get; }
-    /*
-    bool isLobbyButtonOn { get; }
+    bool isLobbyButtonActive { get; }
     event EventHandler onAccessLobbyRequested;
-    void showLobbyButton(bool show);
+    void showLobbyButton(bool visible);
 
-    bool isBankingButtonOn { get; }
+    bool isBankingButtonActive { get; }
     event EventHandler onAccessBankingRequested;
-    event EventHandler onDismissBankingRequested;
-    void enableBanking(bool enable);
+    event EventHandler onCloseBankingRequested;
+    void enableBanking(bool enabled);
     void handleBankingClosed();
 
+    bool isBettingEnabled { get; }
     event EventHandler onBetIncreaseRequested;
     event EventHandler onBetDecreaseRequested;
-    void enableBets(bool enable);
+    void showBetControls(bool visible);
+    void enableBetting(bool enabled);
 
-    bool isAutoBetButtonOn { get; }
+    bool isAutoBetButtonActive { get; }
     event EventHandler onAutoBetStartRequested;
     event EventHandler onAutoBetStopRequested;
-    void enableAutoBet(bool enable);
+    void enableAutoBet(bool enabled);
     void handleAutoBetStopped();
 
-    bool isSoundButtonOn { get; }
+    bool isSoundButtonActive { get; }
     event EventHandler onSoundToggleRequested;
-    void enableSoundControl(bool enable);
-    */
+    void enableSoundControl(bool enabled);
+    void setSoundControl(bool active);
 }

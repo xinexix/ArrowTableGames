@@ -1,4 +1,4 @@
-using System;
+using System.Text;
 using UnityEngine;
 
 public class TransactionLogger : MonoBehaviour
@@ -14,18 +14,21 @@ public class TransactionLogger : MonoBehaviour
 
     private void printTransaction(object sender, TransactionEventArgs e)
     {
+        var sb = new StringBuilder();
         var transaction = e.transaction;
 
-        Debug.Log("----- TRANSACTION COMMITTED -----");
-        Debug.Log($"  Game: {transaction.gameId}/{transaction.instanceId}");
-        Debug.Log($"  Wager: {transaction.wagerAmount}   Win: {transaction.winAmount}");
+        sb.Append("----- TRANSACTION COMMITTED -----");
+        sb.Append($"\n> Game: {transaction.gameId}     ID: {transaction.instanceId}");
+        sb.Append($"\n> Wager: {transaction.wagerAmount}     Win: {transaction.winAmount}");
 
         foreach (var step in transaction.steps)
         {
             var result = step.adjustment == 0 ? "" : $"({step.adjustment})";
-            Debug.Log($"    {step.actor}: {step.action} => {step.outcome} {result}");
+            sb.Append($"\n>   {step.actor}: {step.action} => {step.outcome} {result}");
         }
 
-        Debug.Log("---------------------------------");
+        sb.Append("\n---------------------------------");
+
+        Debug.Log(sb.ToString());
     }
 }

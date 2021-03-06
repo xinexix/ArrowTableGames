@@ -11,12 +11,6 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
     private IAbortDialog _abortDialog;
     private string _latestGameId;
 
-    public event EventHandler onShowLobbyRequested;
-    public event EventHandler onFocusStolen;
-    public event EventHandler onFocusReturned;
-    public event EventHandler onTransactionAborted;
-    public event EventHandler<BoolEventArgs> onSoundChanged;
-
     public BaseSOProvider<IWalletController> walletProvider;
     public BaseSOProvider<IBetSettingsController> betSettingsProvider;
     public BaseSOProvider<ITransactionLedger> ledgerProvider;
@@ -25,6 +19,14 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
     public BaseProvider<IDialogScrim> dialogScrimProvider;
     public BaseProvider<IAbortDialog> abortDialogProvider;
     public BaseProvider<IBankingDialog> bankingDialogProvider;
+
+    public bool isTransactionOpen => _bankingFacade.isTransactionOpen;
+
+    public event EventHandler onShowLobbyRequested;
+    public event EventHandler onFocusStolen;
+    public event EventHandler onFocusReturned;
+    public event EventHandler onTransactionAborted;
+    public event EventHandler<BoolEventArgs> onSoundChanged;
 
     public override IConsoleFacade value => this;
 
@@ -181,6 +183,17 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
         updateScrimVisibility();
     }
 
+    public void showAbortDialog()
+    {
+        _controlStrip.enableBanking(false);
+        _controlStrip.enableBetting(false);
+
+        _abortDialog.show();
+        _dialogScrim.show();
+
+        onFocusStolen?.Invoke(this, EventArgs.Empty);
+    }
+
     public void handleLobbyShown()
     {
         // TODO handle if either dialog is showing
@@ -223,6 +236,8 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
     public void submitBet()
     {
         _bankingFacade.submitBet(_latestGameId);
+
+        _controlStrip.enableBetting(false);
     }
 
     public void submitAction(string actor, string action, string outcome, int? adjustment)
@@ -233,6 +248,8 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
     public void completeTransaction()
     {
         _bankingFacade.finalizeTransaction();
+
+        _controlStrip.enableBetting(true);
     }
 
     private void handleSoundToggleRequested(object sender, EventArgs e)

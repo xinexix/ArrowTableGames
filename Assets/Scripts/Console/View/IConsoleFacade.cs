@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public interface IConsoleFacade
 {
+    bool isTransactionOpen { get; }
+    void showAbortDialog();
+
     event EventHandler onShowLobbyRequested;
     void handleLobbyShown();
 

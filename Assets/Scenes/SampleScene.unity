@@ -2244,7 +2244,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 970474306}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2254,6 +2254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: requestNewGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LobbyController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
@@ -2720,7 +2725,6 @@ GameObject:
   - component: {fileID: 970474303}
   - component: {fileID: 970474302}
   - component: {fileID: 970474306}
-  - component: {fileID: 970474307}
   m_Layer: 5
   m_Name: LobbyCanvas
   m_TagString: Untagged
@@ -2820,21 +2824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c035cfaf0f7d34aaa09cb7a83d82bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consoleProvider: {fileID: 1763890990}
   activeGameContainer: {fileID: 38413611}
---- !u!114 &970474307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 970474301}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8a63a918de1e84781ace8f9d20ae5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyController: {fileID: 970474306}
-  abortPromptRoot: {fileID: 1405423379}
+  betStepsProvider: {fileID: 11400000, guid: 0ed0bc8c654fbfb498b523b30643afd4, type: 2}
 --- !u!1 &982131462
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,7 +6351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 970474306}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -6369,6 +6361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: requestNewGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LobbyController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4388804396881062026, guid: c62068d365558d94eb78998299f78506,
         type: 3}

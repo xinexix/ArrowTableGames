@@ -5,7 +5,7 @@ public class ShowOnActiveGame : MonoBehaviour
 {
     public LobbyController lobbyController;
 
-    public UniqueIdSO comparisonId;
+    public GameIdSO comparisonId;
 
     private void Start()
     {
@@ -23,9 +23,9 @@ public class ShowOnActiveGame : MonoBehaviour
 
     private void handleGameStarted(object sender, EventArgs e)
     {
-        var activeGameId = lobbyController.activeGame?.uniqueId;
+        var activeGameId = lobbyController.activeGame?.gameId;
 
-        gameObject.SetActive(activeGameId == comparisonId);
+        gameObject.SetActive(activeGameId == comparisonId.value);
     }
 
     private void handleGameExited(object sender, EventArgs e)

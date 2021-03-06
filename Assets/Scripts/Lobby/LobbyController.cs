@@ -51,7 +51,7 @@ public class LobbyController : MonoBehaviour
         {
             startGame(game);
         }
-        else if (activeGame.uniqueId == game.uniqueId)
+        else if (activeGame.gameId == game.gameId)
         {
             returnToActiveGame();
         }

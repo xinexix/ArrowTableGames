@@ -4,9 +4,9 @@ using UnityEngine;
 public class GameFacade : MonoBehaviour
 {
     [SerializeField]
-    private UniqueIdSO _uniqueId;
+    private BaseSOProvider<string> _gameId;
 
-    public UniqueIdSO uniqueId => _uniqueId;
+    public string gameId => _gameId.value;
 
     public bool isInProgress => true;
 }

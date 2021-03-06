@@ -17116,6 +17116,24 @@
 									"subViews": [
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF4BjST6fD92og=",
+											"_parent": {
+												"$ref": "AAAAAAF3/f+e2euUlTo="
+											},
+											"model": {
+												"$ref": "AAAAAAF4BjSTuPDiv9w="
+											},
+											"fillColor": "#d8f2ff",
+											"font": "Arial;13;0",
+											"left": 317,
+											"top": 195,
+											"width": 465.6767578125,
+											"height": 13,
+											"text": "+isTransactionOpen: bool {readOnly}",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAF4AQvYkNgO9K0=",
 											"_parent": {
 												"$ref": "AAAAAAF3/f+e2euUlTo="
@@ -17126,7 +17144,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 195,
+											"top": 210,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+onShowLobbyRequested: EventHandler {readOnly}",
@@ -17144,7 +17162,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 210,
+											"top": 225,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+onFocusStolen: EventHandler {readOnly}",
@@ -17162,7 +17180,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 225,
+											"top": 240,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+onFocusReturned: EventHandler {readOnly}",
@@ -17180,7 +17198,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 240,
+											"top": 255,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+onTransactionAborted: EventHandler {readOnly}",
@@ -17198,7 +17216,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 255,
+											"top": 270,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+onSoundChanged: EventHandler<BoolEventArgs> {readOnly}",
@@ -17210,7 +17228,7 @@
 									"left": 312,
 									"top": 190,
 									"width": 475.6767578125,
-									"height": 83
+									"height": 98
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -17234,7 +17252,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 278,
+											"top": 293,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+handleLobbyShown(): void",
@@ -17252,7 +17270,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 293,
+											"top": 308,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+handleGameEntered(gameId: string): void",
@@ -17270,7 +17288,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 308,
+											"top": 323,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+setBetSteps(betSteps: List<int>): void",
@@ -17288,7 +17306,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 323,
+											"top": 338,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+submitBet(): void",
@@ -17306,7 +17324,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 338,
+											"top": 353,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+submitAction(actor: string, action: string, outcome: string, adjustment?: int): void",
@@ -17324,7 +17342,7 @@
 											"fillColor": "#d8f2ff",
 											"font": "Arial;13;0",
 											"left": 317,
-											"top": 353,
+											"top": 368,
 											"width": 465.6767578125,
 											"height": 13,
 											"text": "+completeTransaction(): void",
@@ -17334,7 +17352,7 @@
 									"fillColor": "#d8f2ff",
 									"font": "Arial;13;0",
 									"left": 312,
-									"top": 273,
+									"top": 288,
 									"width": 475.6767578125,
 									"height": 98
 								},
@@ -17379,7 +17397,7 @@
 							"left": 312,
 							"top": 152,
 							"width": 475.6767578125,
-							"height": 219,
+							"height": 234,
 							"autoResize": true,
 							"nameCompartment": {
 								"$ref": "AAAAAAF3/f+e2euPj7I="
@@ -17419,7 +17437,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 537,
-									"top": 395,
+									"top": 401,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -17440,7 +17458,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 522,
-									"top": 395,
+									"top": 401,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -17461,7 +17479,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 566,
-									"top": 394,
+									"top": 402,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -17479,7 +17497,7 @@
 								"$ref": "AAAAAAF35PKi8uQ+wQg="
 							},
 							"lineStyle": 1,
-							"points": "553:431;551:371",
+							"points": "553:431;552:386",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3/f/uqu2z22k="
@@ -38734,6 +38752,16 @@
 						}
 					],
 					"attributes": [
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF4BjSTuPDiv9w=",
+							"_parent": {
+								"$ref": "AAAAAAF3/f+e2OuMfFY="
+							},
+							"name": "isTransactionOpen",
+							"type": "bool",
+							"isReadOnly": true
+						},
 						{
 							"_type": "UMLAttribute",
 							"_id": "AAAAAAF4AQvYWtfzMrA=",

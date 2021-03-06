@@ -83,7 +83,7 @@ public class BankController : IBankingFacade, IDisposable
             "Player",
             "Withdrew funds",
             "Balance zeroed",
-            withdrawValue
+            -withdrawValue
         );
 
         transaction.addStep(step);
@@ -141,7 +141,15 @@ public class BankController : IBankingFacade, IDisposable
 
         if (lastTransaction == null) return;
 
-        _wallet.adjustCredit(lastTransaction.winAmount);
+        if (lastTransaction.gameId == "Banking")
+        {
+            var bankAdjust = lastTransaction.winAmount - lastTransaction.wagerAmount;
+            _wallet.adjustCredit(bankAdjust);
+        }
+        else
+        {
+            _wallet.adjustCredit(lastTransaction.winAmount);
+        }
     }
 
     protected virtual void handleTransactionProgressed(object sender, EventArgs e)
@@ -150,7 +158,7 @@ public class BankController : IBankingFacade, IDisposable
 
         if (pendingTransaction == null) return;
 
-        _wallet.setWager(-pendingTransaction.wagerAmount);
+        _wallet.setWager(pendingTransaction.wagerAmount);
     }
 
     protected virtual void handleTransactionAborted(object sender, EventArgs e)

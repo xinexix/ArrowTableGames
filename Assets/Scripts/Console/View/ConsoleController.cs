@@ -211,6 +211,8 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
     public void setBetSteps(List<int> betSteps)
     {
         _bankingFacade.setBetSteps(betSteps);
+
+        _controlStrip.showBetControls(betSteps != null && betSteps.Count > 0);
     }
 
     private void handleBetIncreaseRequested(object sender, EventArgs e)

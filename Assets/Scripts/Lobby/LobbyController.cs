@@ -39,6 +39,8 @@ public class LobbyController : MonoBehaviour
         if (_activeGame == null) return;
 
         activeGameContainer.SetActive(false);
+
+        _console.handleLobbyShown();
     }
 
     public void requestNewGame(GameFacade game)
@@ -76,6 +78,8 @@ public class LobbyController : MonoBehaviour
         // TODO temporary
         _console.setBetSteps(betStepsProvider?.value);
 
+        _console.handleGameEntered(_activeGame.gameId);
+
         onGameStarted?.Invoke(this, EventArgs.Empty);
     }
 
@@ -96,6 +100,8 @@ public class LobbyController : MonoBehaviour
         if (_activeGame == null) return;
 
         activeGameContainer.SetActive(true);
+
+        _console.handleGameEntered(_activeGame.gameId);
     }
 
     private void handleTransactionAborted(object sender, EventArgs e)

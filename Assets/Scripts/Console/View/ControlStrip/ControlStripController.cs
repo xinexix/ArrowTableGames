@@ -118,9 +118,9 @@ public class ControlStripController : BaseProvider<IControlStrip>, IControlStrip
         _bankingToggle.isEnabled = enabled;
     }
 
-    public void handleBankingClosed()
+    public void activateBanking(bool active)
     {
-        _bankingToggle.isActive = false;
+        _bankingToggle.isActive = active;
     }
 
     public void showBetControls(bool visible)
@@ -132,17 +132,17 @@ public class ControlStripController : BaseProvider<IControlStrip>, IControlStrip
     public void enableBetting(bool enabled)
     {
         _betStepper.isEnabled = enabled;
-        enableAutoBet(enabled);
-    }
-
-    public void enableAutoBet(bool enabled)
-    {
         _autoBetToggle.isEnabled = enabled;
+
+        if (!enabled)
+        {
+            activateAutoBet(false);
+        }
     }
 
-    public void handleAutoBetStopped()
+    public void activateAutoBet(bool active)
     {
-        _autoBetToggle.isActive = false;
+        _autoBetToggle.isActive = active;
     }
 
     public void enableSoundControl(bool enabled)
@@ -150,7 +150,7 @@ public class ControlStripController : BaseProvider<IControlStrip>, IControlStrip
         _soundToggle.isVisible = enabled;
     }
 
-    public void setSoundControl(bool active)
+    public void activateSoundControl(bool active)
     {
         _soundToggle.isActive = active;
     }

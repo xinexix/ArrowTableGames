@@ -10,7 +10,7 @@ public interface IControlStrip
     event EventHandler onAccessBankingRequested;
     event EventHandler onCloseBankingRequested;
     void enableBanking(bool enabled);
-    void handleBankingClosed();
+    void activateBanking(bool active);
 
     bool isBettingEnabled { get; }
     event EventHandler onBetIncreaseRequested;
@@ -21,11 +21,10 @@ public interface IControlStrip
     bool isAutoBetButtonActive { get; }
     event EventHandler onAutoBetStartRequested;
     event EventHandler onAutoBetStopRequested;
-    void enableAutoBet(bool enabled);
-    void handleAutoBetStopped();
+    void activateAutoBet(bool active);
 
     bool isSoundButtonActive { get; }
     event EventHandler onSoundToggleRequested;
     void enableSoundControl(bool enabled);
-    void setSoundControl(bool active);
+    void activateSoundControl(bool active);
 }

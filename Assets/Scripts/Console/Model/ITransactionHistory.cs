@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public interface ITransactionHistory
 {
     IReadOnlyList<ITransactionRecord> history { get; }
-    event EventHandler onTransactionCommitted;
+    event EventHandler<TransactionEventArgs> onTransactionCommitted;
     ITransactionRecord lastCommittedTransaction { get; }
 
     ITransactionRecord inProgressTransaction { get; }
-    event EventHandler onTransactionProgressed;
+    event EventHandler<TransactionEventArgs> onTransactionProgressed;
 
-    event EventHandler onTransactionAborted;
+    event EventHandler<TransactionEventArgs> onTransactionAborted;
 }

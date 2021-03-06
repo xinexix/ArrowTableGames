@@ -8,21 +8,21 @@ public class TransactionLedger : ITransactionLedger
 
     public IReadOnlyList<ITransactionRecord> history => _history.AsReadOnly();
 
-    public event EventHandler onTransactionCommitted;
+    public event EventHandler<TransactionEventArgs> onTransactionCommitted;
 
     public ITransactionRecord lastCommittedTransaction => _history.Count > 0 ? _history[_history.Count - 1] : null;
 
     public ITransactionRecord inProgressTransaction => _activeRecord;
 
-    public event EventHandler onTransactionProgressed;
+    public event EventHandler<TransactionEventArgs> onTransactionProgressed;
 
-    public event EventHandler onTransactionAborted;
+    public event EventHandler<TransactionEventArgs> onTransactionAborted;
 
     public void appendTransaction(ITransactionRecord transaction)
     {
         _history.Add(transaction);
 
-        onTransactionCommitted?.Invoke(this, EventArgs.Empty);
+        onTransactionCommitted?.Invoke(this, new TransactionEventArgs(transaction));
     }
 
     /// <remarks>
@@ -51,7 +51,7 @@ public class TransactionLedger : ITransactionLedger
 
         _activeRecord.addStep(step);
 
-        onTransactionProgressed?.Invoke(this, EventArgs.Empty);
+        onTransactionProgressed?.Invoke(this, new TransactionEventArgs(_activeRecord));
     }
 
     protected virtual TransactionStep createStep(string actor, string action, string outcome, int? adjustment)
@@ -73,10 +73,9 @@ public class TransactionLedger : ITransactionLedger
     {
         if (_activeRecord == null) return;
 
-        // TODO onTransactionAborted should pass a custom EventArgs that includes this
-        // var transaction = _activeRecord;
+        var transaction = _activeRecord;
         _activeRecord = null;
 
-        onTransactionAborted?.Invoke(this, EventArgs.Empty);
+        onTransactionAborted?.Invoke(this, new TransactionEventArgs(transaction));
     }
 }

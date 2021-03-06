@@ -8,6 +8,8 @@ public class BankController : IBankingFacade, IDisposable
     private ITransactionLedger _ledger;
     private int _instanceCount = 0;
 
+    public bool isTransactionOpen => _ledger.inProgressTransaction != null;
+
     public BankController(
         IWalletController wallet,
         IBetSettingsController betSettings,

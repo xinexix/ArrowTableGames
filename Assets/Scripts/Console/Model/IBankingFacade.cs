@@ -10,6 +10,7 @@ public interface IBankingFacade
     void increaseBet();
     void decreaseBet();
 
+    bool isTransactionOpen { get; }
     void submitBet(string gameId);
     void submitAction(string actor, string action, string outcome, int? adjustment);
     void finalizeTransaction();

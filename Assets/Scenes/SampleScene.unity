@@ -4245,7 +4245,7 @@ RectTransform:
   - {fileID: 1568717204}
   - {fileID: 983602485}
   m_Father: {fileID: 1763890989}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.3}
   m_AnchorMax: {x: 0.75, y: 0.8}
@@ -4791,10 +4791,11 @@ MonoBehaviour:
   m_text: 'You have a game in progress.
 
 
-    Forfeit your wager and
+    This operation will forfeit your wager.
 
-    start a
-    new game?'
+
+    Do
+    you wish to continue?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5108,6 +5109,7 @@ GameObject:
   - component: {fileID: 1763890987}
   - component: {fileID: 1763890986}
   - component: {fileID: 1763890990}
+  - component: {fileID: 1763890991}
   m_Layer: 5
   m_Name: ConsoleCanvas
   m_TagString: Untagged
@@ -5187,8 +5189,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2903818}
-  - {fileID: 1405423380}
   - {fileID: 2096734945}
+  - {fileID: 1405423380}
   - {fileID: 2118633488}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -5216,8 +5218,21 @@ MonoBehaviour:
   ledgerProvider: {fileID: 11400000, guid: b6ee3ae08f73f514b855c904a2e3e729, type: 2}
   controlStripProvider: {fileID: 2118633491}
   dialogScrimProvider: {fileID: 2903819}
-  bankingDialogProvider: {fileID: 2096734948}
   abortDialogProvider: {fileID: 1405423383}
+  bankingDialogProvider: {fileID: 2096734948}
+--- !u!114 &1763890991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763890985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d187c5552fbbfd4384cac1d994c9109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ledgerProvider: {fileID: 11400000, guid: b6ee3ae08f73f514b855c904a2e3e729, type: 2}
 --- !u!1 &1775247247
 GameObject:
   m_ObjectHideFlags: 0
@@ -6162,7 +6177,7 @@ RectTransform:
   - {fileID: 534840872}
   - {fileID: 2081692091}
   m_Father: {fileID: 1763890989}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.3}
   m_AnchorMax: {x: 0.75, y: 0.8}

@@ -10,6 +10,9 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
     private IAbortDialog _abortDialog;
 
     public event EventHandler onShowLobbyRequested;
+    public event EventHandler onFocusStolen;
+    public event EventHandler onFocusReturned;
+    public event EventHandler onTransactionAborted;
 
     public BaseSOProvider<IWalletController> walletProvider;
     public BaseSOProvider<IBetSettingsController> betSettingsProvider;
@@ -36,7 +39,27 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
 
     private void Start()
     {
+        _controlStrip.showLobbyButton(false);
+        _controlStrip.enableBanking(true);
+        _controlStrip.activateBanking(false);
+        _controlStrip.showBetControls(false);
+        _controlStrip.enableBetting(false);
+        _controlStrip.enableSoundControl(true);
+        _controlStrip.activateSoundControl(true);
+
         _controlStrip.onAccessLobbyRequested += handleAccessLobbyRequested;
+        _controlStrip.onAccessBankingRequested += handleAccessBankingRequested;
+        _controlStrip.onCloseBankingRequested += handleCloseBankingRequested;
+
+        _dialogScrim.onInteracted += handleScrimInteracted;
+
+        _bankingDialog.onDialogHidden += handleBankingDialogHidden;
+        _bankingDialog.onDepositRequested += handleDepositRequest;
+        _bankingDialog.onCashoutRequested += handleCashoutRequest;
+
+        _abortDialog.onAbortConfirmed += handleAbortConfirmed;
+        _abortDialog.onAbortCancelled += handleAbortCancelled;
+        _abortDialog.onDialogHidden += handleAbortDialogHidden;
     }
 
     private void handleAccessLobbyRequested(object sender, EventArgs e)
@@ -44,57 +67,39 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
         onShowLobbyRequested?.Invoke(this, EventArgs.Empty);
     }
 
-    public void handleLobbyShown()
+    private void handleAccessBankingRequested(object sender, EventArgs e)
     {
-        _controlStrip.showLobbyButton(false);
+        _controlStrip.activateBanking(true);
+        _controlStrip.enableBetting(false);
+
+        _bankingDialog.show();
+        _dialogScrim.show();
+
+        onFocusStolen?.Invoke(this, EventArgs.Empty);
     }
 
-    public void handleGameEntered(string gameId)
+    private void handleCloseBankingRequested(object sender, EventArgs e)
     {
-        _controlStrip.showLobbyButton(true);
-    }
-
-    private void OnEnable()
-    {
-        /*
-        _dialogScrim.onInteracted += handleScrimInteracted;
-
-        _bankingDialog.onDialogHidden += handleDialogHidden;
-        _abortDialog.onDialogHidden += handleDialogHidden;
-
-        _bankingDialog.onDepositRequested += handleDepositRequest;
-        _bankingDialog.onCashoutRequested += handleCashoutRequest;
-        */
-    }
-
-    private void OnDisable()
-    {
-        /*
-        _dialogScrim.onInteracted -= handleScrimInteracted;
-
-        _bankingDialog.onDialogHidden -= handleDialogHidden;
-        _abortDialog.onDialogHidden -= handleDialogHidden;
-
-        _bankingDialog.onDepositRequested -= handleDepositRequest;
-        _bankingDialog.onCashoutRequested -= handleCashoutRequest;
-        */
+        _bankingDialog.hide();
     }
 
     private void handleScrimInteracted(object sender, EventArgs e)
     {
-        if (_bankingDialog.isShowing)
-        {
-            _bankingDialog.hide();
-        }
-
         if (_abortDialog.isShowing)
         {
             _abortDialog.hide();
         }
+        if (_bankingDialog.isShowing)
+        {
+            _bankingDialog.hide();
+        }
     }
 
-    private void handleDialogHidden(object sender, EventArgs e)
+    private void handleBankingDialogHidden(object sender, EventArgs e)
     {
+        _controlStrip.activateBanking(false);
+        _controlStrip.enableBetting(true);
+
         updateScrimVisibility();
     }
 
@@ -109,13 +114,9 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
         else
         {
             _dialogScrim.hide();
-        }
-    }
 
-    private void showBankingDialog(object sender, EventArgs e)
-    {
-        _bankingDialog.show();
-        _dialogScrim.show();
+            onFocusReturned?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void handleDepositRequest(object sender, AmountEventArgs e)
@@ -125,6 +126,21 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
 
     private void handleCashoutRequest(object sender, EventArgs e)
     {
+        if (_bankingFacade.isTransactionOpen)
+        {
+            _controlStrip.enableBanking(false);
+            _controlStrip.enableBetting(false);
+
+            _abortDialog.show();
+        }
+        else
+        {
+            fulfillCashoutRequest();
+        }
+    }
+
+    private void fulfillCashoutRequest()
+    {
         var amount = _bankingFacade.cashOut();
 
         // Hack just for simplicity
@@ -132,8 +148,34 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
         Debug.Log($"Ticket printed for {formattedAmount}");
     }
 
-    private void hideBankingDialog(object sender, EventArgs e)
+    private void handleAbortConfirmed(object sender, EventArgs e)
     {
-        _bankingDialog.hide();
+        fulfillCashoutRequest();
+
+        _abortDialog.hide();
+    }
+
+    private void handleAbortCancelled(object sender, EventArgs e)
+    {
+        _abortDialog.hide();
+    }
+
+    private void handleAbortDialogHidden(object sender, EventArgs e)
+    {
+        _controlStrip.enableBanking(true);
+
+        updateScrimVisibility();
+    }
+
+    public void handleLobbyShown()
+    {
+        // TODO handle if either dialog is showing
+
+        _controlStrip.showLobbyButton(false);
+    }
+
+    public void handleGameEntered(string gameId)
+    {
+        _controlStrip.showLobbyButton(true);
     }
 }

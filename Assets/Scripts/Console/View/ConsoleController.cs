@@ -1,18 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsoleController : MonoBehaviour, IConsoleFacade
+public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
 {
     private IBankingFacade _bankingFacade;
     private IControlStrip _controlStrip;
     private IDialogScrim _dialogScrim;
     private IBankingDialog _bankingDialog;
     private IAbortDialog _abortDialog;
+    private string _latestGameId;
 
     public event EventHandler onShowLobbyRequested;
     public event EventHandler onFocusStolen;
     public event EventHandler onFocusReturned;
     public event EventHandler onTransactionAborted;
+    public event EventHandler<BoolEventArgs> onSoundChanged;
 
     public BaseSOProvider<IWalletController> walletProvider;
     public BaseSOProvider<IBetSettingsController> betSettingsProvider;
@@ -22,6 +25,8 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
     public BaseProvider<IDialogScrim> dialogScrimProvider;
     public BaseProvider<IAbortDialog> abortDialogProvider;
     public BaseProvider<IBankingDialog> bankingDialogProvider;
+
+    public override IConsoleFacade value => this;
 
     private void Awake()
     {
@@ -60,6 +65,13 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
         _abortDialog.onAbortConfirmed += handleAbortConfirmed;
         _abortDialog.onAbortCancelled += handleAbortCancelled;
         _abortDialog.onDialogHidden += handleAbortDialogHidden;
+
+        _controlStrip.onBetIncreaseRequested += handleBetIncreaseRequested;
+        _controlStrip.onBetDecreaseRequested += handleBetDecreaseRequested;
+        _controlStrip.onAutoBetStartRequested += handleAutoBetStartRequested;
+        _controlStrip.onAutoBetStopRequested += handleAutoBetStopRequested;
+
+        _controlStrip.onSoundToggleRequested += handleSoundToggleRequested;
     }
 
     private void handleAccessLobbyRequested(object sender, EventArgs e)
@@ -153,6 +165,8 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
         fulfillCashoutRequest();
 
         _abortDialog.hide();
+
+        onTransactionAborted?.Invoke(this, EventArgs.Empty);
     }
 
     private void handleAbortCancelled(object sender, EventArgs e)
@@ -176,6 +190,55 @@ public class ConsoleController : MonoBehaviour, IConsoleFacade
 
     public void handleGameEntered(string gameId)
     {
+        _latestGameId = gameId;
+
         _controlStrip.showLobbyButton(true);
+    }
+
+    public void setBetSteps(List<int> betSteps)
+    {
+        _bankingFacade.setBetSteps(betSteps);
+    }
+
+    private void handleBetIncreaseRequested(object sender, EventArgs e)
+    {
+        _bankingFacade.increaseBet();
+    }
+
+    private void handleBetDecreaseRequested(object sender, EventArgs e)
+    {
+        _bankingFacade.decreaseBet();
+    }
+
+    private void handleAutoBetStartRequested(object sender, EventArgs e)
+    {
+        _controlStrip.activateAutoBet(true);
+    }
+
+    private void handleAutoBetStopRequested(object sender, EventArgs e)
+    {
+        _controlStrip.activateAutoBet(false);
+    }
+
+    public void submitBet()
+    {
+        _bankingFacade.submitBet(_latestGameId);
+    }
+
+    public void submitAction(string actor, string action, string outcome, int? adjustment)
+    {
+        _bankingFacade.submitAction(actor, action, outcome, adjustment);
+    }
+
+    public void completeTransaction()
+    {
+        _bankingFacade.finalizeTransaction();
+    }
+
+    private void handleSoundToggleRequested(object sender, EventArgs e)
+    {
+        _controlStrip.activateSoundControl(!_controlStrip.isSoundButtonActive);
+
+        onSoundChanged?.Invoke(this, new BoolEventArgs(_controlStrip.isSoundButtonActive));
     }
 }

@@ -1,6 +1,10 @@
 # Arrow Table Games
 
-This project is an assessment performed by Andrew Peet using Unity v2019.4.20f1, VS Code, and C# .NET 3.1 SDK.
+This project is an assessment performed by Andrew Peet using Unity v2019.4.20f1 and VS Code.
+
+**NOTE** I'm having trouble getting Unity errors to show up in VS Code.
+It may be something with the projects configuration, or maybe I haven't
+installed the right C# .NET SDK thing?
 
 ## Requirements
 
@@ -19,3 +23,14 @@ This project is an assessment performed by Andrew Peet using Unity v2019.4.20f1,
 > You can decide what the pays are
 >
 > Apply SOLID Design if you can
+
+## Comments
+
+Notes I've left specifically for reviewers of this assessment I've wrapped in `<remarks>`.
+Traditionally I don't want code littered with "discussion" comments.
+
+```csharp
+/// <remarks>
+/// I left you something...
+/// </remarks>
+```

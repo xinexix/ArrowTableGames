@@ -164,7 +164,7 @@ public class ConsoleController : BaseProvider<IConsoleFacade>, IConsoleFacade
 
     private void handleAbortConfirmed(object sender, EventArgs e)
     {
-        fulfillCashoutRequest();
+        _bankingFacade.abortTransaction();
 
         _abortDialog.hide();
 

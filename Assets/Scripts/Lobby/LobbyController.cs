@@ -80,6 +80,8 @@ public class LobbyController : MonoBehaviour
 
         _console.handleGameEntered(_activeGame.gameId);
 
+        returnToActiveGame();
+
         onGameStarted?.Invoke(this, EventArgs.Empty);
     }
 
